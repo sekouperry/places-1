@@ -11,6 +11,7 @@
 		6685547416E93B0800789F8E /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547316E93B0800789F8E /* ExploreViewController.m */; };
 		6685547716E969D900789F8E /* ApiConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547616E969D900789F8E /* ApiConnection.m */; };
 		6685547A16EA4C2300789F8E /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547916EA4C2300789F8E /* Venue.m */; };
+		6685547D16EA952500789F8E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547C16EA952500789F8E /* SearchViewController.m */; };
 		66E7935616E80512009A9152 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935516E80512009A9152 /* UIKit.framework */; };
 		66E7935816E80512009A9152 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935716E80512009A9152 /* Foundation.framework */; };
 		66E7935A16E80512009A9152 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935916E80512009A9152 /* CoreGraphics.framework */; };
@@ -49,8 +50,10 @@
 		6685547316E93B0800789F8E /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		6685547516E969D900789F8E /* ApiConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiConnection.h; sourceTree = "<group>"; };
 		6685547616E969D900789F8E /* ApiConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiConnection.m; sourceTree = "<group>"; };
-		6685547816EA4C2300789F8E /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
-		6685547916EA4C2300789F8E /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
+		6685547816EA4C2300789F8E /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Venue.h; path = places/Venue.h; sourceTree = "<group>"; };
+		6685547916EA4C2300789F8E /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Venue.m; path = places/Venue.m; sourceTree = "<group>"; };
+		6685547B16EA952400789F8E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		6685547C16EA952500789F8E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		66E7935216E80512009A9152 /* places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E7935516E80512009A9152 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		66E7935716E80512009A9152 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,9 +113,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6685547E16EA953200789F8E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6685547816EA4C2300789F8E /* Venue.h */,
+				6685547916EA4C2300789F8E /* Venue.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		66E7934916E80512009A9152 = {
 			isa = PBXGroup;
 			children = (
+				6685547E16EA953200789F8E /* Models */,
 				66E7935B16E80512009A9152 /* places */,
 				66E7937F16E80512009A9152 /* placesTests */,
 				66E7935416E80512009A9152 /* Frameworks */,
@@ -157,8 +170,8 @@
 				66E7939416E80D09009A9152 /* CenterPanelController.m */,
 				6685547216E93B0800789F8E /* ExploreViewController.h */,
 				6685547316E93B0800789F8E /* ExploreViewController.m */,
-				6685547816EA4C2300789F8E /* Venue.h */,
-				6685547916EA4C2300789F8E /* Venue.m */,
+				6685547B16EA952400789F8E /* SearchViewController.h */,
+				6685547C16EA952500789F8E /* SearchViewController.m */,
 				6685547516E969D900789F8E /* ApiConnection.h */,
 				6685547616E969D900789F8E /* ApiConnection.m */,
 				66E7937016E80512009A9152 /* ListViewController.h */,
@@ -334,6 +347,7 @@
 				6685547416E93B0800789F8E /* ExploreViewController.m in Sources */,
 				6685547716E969D900789F8E /* ApiConnection.m in Sources */,
 				6685547A16EA4C2300789F8E /* Venue.m in Sources */,
+				6685547D16EA952500789F8E /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
