@@ -6,10 +6,16 @@
 
 @implementation ListViewController
 
+-(id)init {
+    self  = [super init];
+    self.view.frame = [[UIScreen mainScreen] bounds];
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 360, 480)];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.tableView];
 }
 

@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "places/CenterPanelController.m"
-         timestampString = "384312034.203609"
+         timestampString = "384387166.916425"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "-toggleMap:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "places/ListViewController.m"
-         timestampString = "384312192.957948"
+         timestampString = "384382502.137194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "12"
-         endingLineNumber = "12"
+         startingLineNumber = "18"
+         endingLineNumber = "18"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
