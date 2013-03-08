@@ -2,7 +2,7 @@
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface SearchViewController : UIViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ExploreViewController : UIViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) MapViewController *mapView;

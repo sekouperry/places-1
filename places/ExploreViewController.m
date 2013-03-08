@@ -1,12 +1,12 @@
-#import "SearchViewController.h"
+#import "ExploreViewController.h"
 #import "ApiConnection.h"
 #import "Venue.h"
 
-@interface SearchViewController ()
+@interface ExploreViewController ()
 
 @end
 
-@implementation SearchViewController
+@implementation ExploreViewController
 
 - (id)init {
     self = [super init];

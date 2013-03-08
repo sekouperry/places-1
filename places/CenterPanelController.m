@@ -1,6 +1,6 @@
 #import "CenterPanelController.h"
 #import "ListViewController.h"
-#import "SearchViewController.h"
+#import "ExploreViewController.h"
 
 @interface CenterPanelController ()
 
@@ -33,8 +33,8 @@
 
 - (void)addLocation {
     if (self.mapShowing) {
-        SearchViewController *searchViewController = [[SearchViewController alloc] init];
-        [self.navigationController pushViewController:searchViewController animated:YES];
+        ExploreViewController *exploreViewController = [[ExploreViewController alloc] init];
+        [self.navigationController pushViewController:exploreViewController animated:YES];
     }
 }
 

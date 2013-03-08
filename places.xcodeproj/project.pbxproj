@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		32FA147EFD414CC1A3BE66F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F32D4231F0DD42369DAE14DD /* libPods.a */; };
-		6685547416E93B0800789F8E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547316E93B0800789F8E /* SearchViewController.m */; };
+		6685547416E93B0800789F8E /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547316E93B0800789F8E /* ExploreViewController.m */; };
 		6685547716E969D900789F8E /* ApiConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547616E969D900789F8E /* ApiConnection.m */; };
 		6685547A16EA4C2300789F8E /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547916EA4C2300789F8E /* Venue.m */; };
 		66E7935616E80512009A9152 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935516E80512009A9152 /* UIKit.framework */; };
@@ -45,8 +45,8 @@
 
 /* Begin PBXFileReference section */
 		3B1A7B79C9EA4BE58A1FA3FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		6685547216E93B0800789F8E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		6685547316E93B0800789F8E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		6685547216E93B0800789F8E /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		6685547316E93B0800789F8E /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		6685547516E969D900789F8E /* ApiConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiConnection.h; sourceTree = "<group>"; };
 		6685547616E969D900789F8E /* ApiConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiConnection.m; sourceTree = "<group>"; };
 		6685547816EA4C2300789F8E /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
@@ -155,8 +155,8 @@
 				66E7939116E80CFD009A9152 /* LeftPanelController.m */,
 				66E7939316E80D09009A9152 /* CenterPanelController.h */,
 				66E7939416E80D09009A9152 /* CenterPanelController.m */,
-				6685547216E93B0800789F8E /* SearchViewController.h */,
-				6685547316E93B0800789F8E /* SearchViewController.m */,
+				6685547216E93B0800789F8E /* ExploreViewController.h */,
+				6685547316E93B0800789F8E /* ExploreViewController.m */,
 				6685547816EA4C2300789F8E /* Venue.h */,
 				6685547916EA4C2300789F8E /* Venue.m */,
 				6685547516E969D900789F8E /* ApiConnection.h */,
@@ -331,7 +331,7 @@
 				66E7939216E80CFD009A9152 /* LeftPanelController.m in Sources */,
 				66E7939516E80D09009A9152 /* CenterPanelController.m in Sources */,
 				66E7939E16E81927009A9152 /* MapViewController.m in Sources */,
-				6685547416E93B0800789F8E /* SearchViewController.m in Sources */,
+				6685547416E93B0800789F8E /* ExploreViewController.m in Sources */,
 				6685547716E969D900789F8E /* ApiConnection.m in Sources */,
 				6685547A16EA4C2300789F8E /* Venue.m in Sources */,
 			);
