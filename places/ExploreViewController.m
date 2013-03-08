@@ -40,14 +40,12 @@
     [self.mapView.view addSubview:self.hideTableButton];
     [self.mapView.view addSubview:self.showTableButton];
 
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchItems)];
+    self.navigationItem.rightBarButtonItem = searchButton;
+
     [self.view addSubview:self.mapView.view];
     [self.view addSubview:self.tableView];
     [self.mapView focusOnLocationWithDistance:500];
-
-
-    void (^fillData)(NSArray *, UITableView *) = ^(NSArray *array, UITableView *tableView){
-        
-    };
 
     [self requestLocations];
 }
