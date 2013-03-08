@@ -2,6 +2,8 @@
 
 @interface ApiConnection : NSObject
 
-+ (NSArray *)fetchLocations:(NSString *)location;
++ (void)fetchVenuesFromLocation:(NSString *)location completionHandler:(void(^)())completion;
+
+@property (strong, nonatomic) NSURLConnection *urlConnection;
 
 @end

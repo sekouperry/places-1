@@ -1,5 +1,6 @@
 #import "SearchViewController.h"
 #import "ApiConnection.h"
+#import "Venue.h"
 
 @interface SearchViewController ()
 
@@ -33,12 +34,20 @@
     self.mapView = [[MapViewController alloc] init];
     self.mapView.view.frame = mapRect;
     self.tableView = [[UITableView alloc] initWithFrame:tableRect];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+
     [self.mapView.view addSubview:self.hideTableButton];
     [self.mapView.view addSubview:self.showTableButton];
 
     [self.view addSubview:self.mapView.view];
     [self.view addSubview:self.tableView];
     [self.mapView focusOnLocationWithDistance:500];
+
+
+    void (^fillData)(NSArray *, UITableView *) = ^(NSArray *array, UITableView *tableView){
+        
+    };
 
     [self requestLocations];
 }
@@ -67,8 +76,51 @@
 }
 
 - (void)requestLocations {
-    NSArray *locations = [ApiConnection fetchLocations:@"40.7,-74"];
-    NSLog(@"%@", locations);
+    CLLocationCoordinate2D location = [[self.mapView.locationManager location] coordinate];
+    NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+
+    void (^completionBlock)(NSArray *) = ^(NSArray *array){
+        self.places = [array mutableCopy];
+        [self plotPlaces];
+        [self.tableView reloadData];
+    };
+
+    [ApiConnection fetchVenuesFromLocation:locationString completionHandler:completionBlock];
 }
+
+- (void)plotPlaces {
+    for (Venue *venue in self.places) {
+        CLLocationCoordinate2D location;
+        location.latitude = [[venue.location objectForKey:@"lat"] doubleValue];
+        location.longitude = [[venue.location objectForKey:@"lng"] doubleValue];
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+        annotation.coordinate = location;
+        annotation.title = venue.name;
+
+        [(MKMapView *)self.mapView.view addAnnotation:annotation];
+    }
+}
+
+#pragma UITableViewDelegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"placeCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = [[self.places objectAtIndex:indexPath.row] name];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.places count];
+}
+
 
 @end

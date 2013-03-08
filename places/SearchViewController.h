@@ -12,4 +12,6 @@
 @property (nonatomic) CGRect originalMapRect;
 @property (nonatomic) CGRect originalTableRect;
 
+@property (strong, nonatomic) NSMutableArray *places;
+
 @end
