@@ -1,4 +1,5 @@
 #import "ExploreViewController.h"
+#import "SearchViewController.h"
 #import "ApiConnection.h"
 #import "Venue.h"
 
@@ -40,7 +41,7 @@
     [self.mapView.view addSubview:self.hideTableButton];
     [self.mapView.view addSubview:self.showTableButton];
 
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchItems)];
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchVenues)];
     self.navigationItem.rightBarButtonItem = searchButton;
 
     [self.view addSubview:self.mapView.view];
@@ -99,6 +100,13 @@
     }
 }
 
+- (void)searchVenues {
+    SearchViewController *exploreView = [[SearchViewController alloc] init];
+    exploreView.view.frame = self.view.frame;
+    exploreView.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController presentModalViewController:exploreView animated:YES];
+}
+
 #pragma UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,6 +127,5 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.places count];
 }
-
 
 @end
