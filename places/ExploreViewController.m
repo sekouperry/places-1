@@ -1,3 +1,4 @@
+#import "LocationManager.h"
 #import "ExploreViewController.h"
 #import "SearchViewController.h"
 #import "ApiConnection.h"
@@ -75,7 +76,7 @@
 }
 
 - (void)requestLocations {
-    CLLocationCoordinate2D location = [[self.mapView.locationManager location] coordinate];
+    CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
     NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
 
     void (^completionBlock)(NSArray *) = ^(NSArray *array){

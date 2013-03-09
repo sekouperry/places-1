@@ -2,10 +2,9 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface MapViewController : UIViewController <CLLocationManagerDelegate>
+@interface MapViewController : UIViewController
 
 @property (strong, nonatomic) MKMapView *mapView;
-@property (strong, nonatomic) CLLocationManager *locationManager;
 
 - (void)focusOnLocationWithDistance:(double)distance;
 
