@@ -2,9 +2,8 @@
 
 @interface ApiConnection : NSObject
 
-+ (void)fetchVenuesFromLocation:(NSString *)location completionHandler:(void(^)())completion;
-+ (void)venuesWithLocation:(NSString *)location andSearchTerm:(NSString *)term completion:(void (^)())completion;
-
++ (void)fetchVenuesFromLocation:(CLLocationCoordinate2D)location completionHandler:(void(^)())completion;
++ (void)fetchVenueswithLocation:(CLLocationCoordinate2D)location Query:(NSString *)query andCompletionHandler:(void (^)())completion;
 @property (strong, nonatomic) NSURLConnection *urlConnection;
 
 @end

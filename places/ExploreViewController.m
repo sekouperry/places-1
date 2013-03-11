@@ -77,7 +77,6 @@
 
 - (void)requestLocations {
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
-    NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
 
     void (^completionBlock)(NSArray *) = ^(NSArray *array){
         self.places = [array mutableCopy];
@@ -85,7 +84,7 @@
         [self.tableView reloadData];
     };
 
-    [ApiConnection fetchVenuesFromLocation:locationString completionHandler:completionBlock];
+    [ApiConnection fetchVenuesFromLocation:location completionHandler:completionBlock];
 }
 
 - (void)plotPlaces {

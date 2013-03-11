@@ -14,6 +14,12 @@
 //}
 
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *foursquareId;
 @property (strong, nonatomic) NSDictionary *location;
+@property (strong, nonatomic) NSString *foursquareUrl;
+@property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSString *openingHours;
+@property (strong, nonatomic) NSString *description;
+
 
 @end

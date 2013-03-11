@@ -60,22 +60,17 @@ const NSInteger kToolBarHeight = 44;
 }
 
 #pragma mark UISearchBarDelegate
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"textchanged button");
-
-}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
 
-   void(^completionBock)(NSArray *) = ^(NSArray *array){
+   void(^completionBlock)(NSArray *) = ^(NSArray *array){
        self.places = array;
        [self.tableView reloadData];
    };
 
-    CLLocationCoordinate2D coordinate = [[[LocationManager sharedLocation] location] coordinate];
-    NSString *locationString = [NSString stringWithFormat:@"%f,%f", coordinate.latitude, coordinate.longitude];
-    [ApiConnection venuesWithLocation:locationString andSearchTerm:searchBar.text completion:completionBock];
+    CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
+    [ApiConnection fetchVenueswithLocation:location Query:searchBar.text andCompletionHandler:completionBlock];
 }
 
 - (void)hideKeyboard {
