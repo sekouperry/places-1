@@ -33,21 +33,23 @@
     self.showTableButton.frame = CGRectMake(20, 350, 30, 30);
     self.showTableButton.hidden = YES;
 
-    self.mapView = [[MapViewController alloc] init];
-    self.mapView.view.frame = mapRect;
+    self.mapViewController = [[MapViewController alloc] init];
+    self.mapViewController.view.frame = mapRect;
+    [(MKMapView *)self.mapViewController.view setDelegate:self];
+
     self.tableView = [[UITableView alloc] initWithFrame:tableRect];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    [self.mapView.view addSubview:self.hideTableButton];
-    [self.mapView.view addSubview:self.showTableButton];
+    [self.mapViewController.view addSubview:self.hideTableButton];
+    [self.mapViewController.view addSubview:self.showTableButton];
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchVenues)];
     self.navigationItem.rightBarButtonItem = searchButton;
 
-    [self.view addSubview:self.mapView.view];
+    [self.view addSubview:self.mapViewController.view];
     [self.view addSubview:self.tableView];
-    [self.mapView focusOnLocationWithDistance:500];
+    [self.mapViewController focusCurrentLocationWithDistance:500];
 
     [self requestLocations];
 }
@@ -56,7 +58,7 @@
 - (void)hideTable {
     self.hideTableButton.hidden = YES;
     [UIView animateWithDuration:0.2 animations:^{
-        self.mapView.view.frame = self.view.frame;
+        self.mapViewController.view.frame = self.view.frame;
     }];
     [UIView animateWithDuration:0.3 animations: ^{
         self.tableView.frame = CGRectOffset(self.tableView.frame, 0, 400);
@@ -71,7 +73,7 @@
         self.showTableButton.hidden = NO;
     }];
     [UIView animateWithDuration:0.3 animations: ^{
-        self.mapView.view.frame = self.originalMapRect;
+        self.mapViewController.view.frame = self.originalMapRect;
     }];
 }
 
@@ -96,7 +98,7 @@
         annotation.coordinate = location;
         annotation.title = venue.name;
 
-        [(MKMapView *)self.mapView.view addAnnotation:annotation];
+        [(MKMapView *)self.mapViewController.view addAnnotation:annotation];
     }
 }
 

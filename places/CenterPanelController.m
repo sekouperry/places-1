@@ -18,11 +18,16 @@
     self.navigationItem.rightBarButtonItems = @[toggleMapButton, addLocationButton];
 
     self.listView = [[ListViewController alloc] init];
-    self.mapView = [[MapViewController alloc] init];
-    self.mapView.view.frame = [[UIScreen mainScreen] bounds];
-    [self.view addSubview:self.mapView.view];
-    [self.mapView focusOnLocationWithDistance:500.0];
+    self.mapViewController = [[MapViewController alloc] init];
+    self.mapViewController.view.frame = [[UIScreen mainScreen] bounds];
+    [self.view addSubview:self.mapViewController.view];
+    [self.mapViewController focusCurrentLocationWithDistance:500.0];
     self.mapShowing = YES;
+
+    self.centerMapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.centerMapButton.frame = CGRectMake(20, 330, 40, 40);
+    [self.centerMapButton addTarget:self action:@selector(centerMap) forControlEvents:UIControlEventTouchUpInside];
+    [self.mapViewController.view addSubview:self.centerMapButton];
 
     return self;
 }
@@ -48,6 +53,10 @@
             self.mapShowing = YES;
         }];
     }
+}
+
+- (void)centerMap {
+    [self.mapViewController focusCurrentLocationWithDistance:500.0];
 }
 
 @end

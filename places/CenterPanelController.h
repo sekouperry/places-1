@@ -4,8 +4,9 @@
 
 @interface CenterPanelController : UIViewController
 
-@property (strong, nonatomic) MapViewController *mapView;
+@property (strong, nonatomic) MapViewController *mapViewController;
 @property (strong, nonatomic) ListViewController *listView;
 @property (nonatomic) BOOL mapShowing;
+@property (strong, nonatomic) UIButton *centerMapButton;
 
 @end

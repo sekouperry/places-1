@@ -14,7 +14,7 @@
     return self;
 }
 
-- (void)focusOnLocationWithDistance:(double)distance {
+- (void)focusCurrentLocationWithDistance:(double)distance {
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance([[LocationManager sharedLocation] location].coordinate, distance, distance);
     [(MKMapView *)self.view setRegion:viewRegion];
     
