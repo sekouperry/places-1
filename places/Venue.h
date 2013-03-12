@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *phoneNumber;
 @property (strong, nonatomic) NSString *openingHours;
 @property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) NSString *iconUrl;
 
 
 @end

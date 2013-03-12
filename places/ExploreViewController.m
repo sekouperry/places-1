@@ -99,6 +99,8 @@
 
         MapAnnotation *annotation = [[MapAnnotation alloc] init];
         annotation.coordinate = location;
+        annotation.name = venue.name;
+        annotation.iconUrl = venue.iconUrl;
 
         [(MKMapView *)self.mapViewController.view addAnnotation:annotation];
     }

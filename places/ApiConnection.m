@@ -30,6 +30,13 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
            Venue *venue = [[Venue alloc] init];
            venue.name = [location objectForKey:@"name"];
            venue.location = [location objectForKey:@"location"];
+
+           NSDictionary *categoryDictionary = [location objectForKey:@"categories"];
+           if ([categoryDictionary count] >= 1) {
+               NSDictionary *iconDictionary = [categoryDictionary objectForKey:@"icon"];
+               venue.iconUrl = [iconDictionary objectForKey:@"prefix"];
+           }
+
            [venues addObject:venue];
        }
        completion(venues);
@@ -57,6 +64,13 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
            Venue *venue = [[Venue alloc] init];
            venue.name = [location objectForKey:@"name"];
            venue.location = [location objectForKey:@"location"];
+
+           NSArray *categoryDictionary = [location objectForKey:@"categories"];
+           if ([categoryDictionary count] >= 1) {
+               NSDictionary *iconDictionary = [[categoryDictionary objectAtIndex:0] objectForKey:@"icon"];
+               venue.iconUrl = [iconDictionary objectForKey:@"prefix"];
+           }
+
            [venues addObject:venue];
        }
        completion(venues);
