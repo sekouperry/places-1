@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		32FA147EFD414CC1A3BE66F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F32D4231F0DD42369DAE14DD /* libPods.a */; };
 		6612E25A16EAB26F00C993CE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6612E25916EAB26F00C993CE /* LocationManager.m */; };
+		6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4416EE453C007FB4C0 /* MapAnnotation.m */; };
+		6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */; };
+		6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6635BC4B16EE6488007FB4C0 /* tempImage.png */; };
 		6685547416E93B0800789F8E /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547316E93B0800789F8E /* ExploreViewController.m */; };
 		6685547716E969D900789F8E /* ApiConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547616E969D900789F8E /* ApiConnection.m */; };
 		6685547A16EA4C2300789F8E /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547916EA4C2300789F8E /* Venue.m */; };
@@ -49,6 +52,11 @@
 		3B1A7B79C9EA4BE58A1FA3FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		6612E25816EAB26F00C993CE /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		6612E25916EAB26F00C993CE /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		6635BC4316EE453C007FB4C0 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
+		6635BC4416EE453C007FB4C0 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
+		6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationView.h; sourceTree = "<group>"; };
+		6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationView.m; sourceTree = "<group>"; };
+		6635BC4B16EE6488007FB4C0 /* tempImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tempImage.png; sourceTree = "<group>"; };
 		6685547216E93B0800789F8E /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
 		6685547316E93B0800789F8E /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		6685547516E969D900789F8E /* ApiConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiConnection.h; sourceTree = "<group>"; };
@@ -173,6 +181,10 @@
 				66E7939416E80D09009A9152 /* CenterPanelController.m */,
 				6685547216E93B0800789F8E /* ExploreViewController.h */,
 				6685547316E93B0800789F8E /* ExploreViewController.m */,
+				6635BC4316EE453C007FB4C0 /* MapAnnotation.h */,
+				6635BC4416EE453C007FB4C0 /* MapAnnotation.m */,
+				6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */,
+				6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */,
 				6685547B16EA952400789F8E /* SearchViewController.h */,
 				6685547C16EA952500789F8E /* SearchViewController.m */,
 				6612E25816EAB26F00C993CE /* LocationManager.h */,
@@ -189,6 +201,7 @@
 		66E7935C16E80512009A9152 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6635BC4B16EE6488007FB4C0 /* tempImage.png */,
 				66E7935D16E80512009A9152 /* places-Info.plist */,
 				66E7935E16E80512009A9152 /* InfoPlist.strings */,
 				66E7936116E80512009A9152 /* main.m */,
@@ -295,6 +308,7 @@
 				66E7936816E80512009A9152 /* Default.png in Resources */,
 				66E7936A16E80512009A9152 /* Default@2x.png in Resources */,
 				66E7936C16E80512009A9152 /* Default-568h@2x.png in Resources */,
+				6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +368,8 @@
 				6685547A16EA4C2300789F8E /* Venue.m in Sources */,
 				6685547D16EA952500789F8E /* SearchViewController.m in Sources */,
 				6612E25A16EAB26F00C993CE /* LocationManager.m in Sources */,
+				6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */,
+				6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

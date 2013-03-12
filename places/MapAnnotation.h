@@ -1,13 +1,8 @@
-//
-//  MapAnnotation.h
-//  places
-//
-//  Created by Adam Fraser on 11/03/13.
-//  Copyright (c) 2013 Adam Fraser. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
-@interface MapAnnotation : NSObject
+@interface MapAnnotation : NSObject <MKAnnotation>
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
 @end

@@ -3,6 +3,8 @@
 #import "SearchViewController.h"
 #import "ApiConnection.h"
 #import "Venue.h"
+#import "MapAnnotation.h"
+#import "MapAnnotationView.h"
 
 @interface ExploreViewController ()
 
@@ -94,9 +96,9 @@
         CLLocationCoordinate2D location;
         location.latitude = [[venue.location objectForKey:@"lat"] doubleValue];
         location.longitude = [[venue.location objectForKey:@"lng"] doubleValue];
-        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+
+        MapAnnotation *annotation = [[MapAnnotation alloc] init];
         annotation.coordinate = location;
-        annotation.title = venue.name;
 
         [(MKMapView *)self.mapViewController.view addAnnotation:annotation];
     }
@@ -107,6 +109,19 @@
     exploreView.view.frame = self.view.frame;
     exploreView.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController presentModalViewController:exploreView animated:YES];
+}
+
+#pragma MapView Delegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    static NSString *identifier = @"AnnotationIdentifier";
+    MapAnnotationView *annotationView = (MapAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+
+    if (annotationView == nil) {
+        annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        annotationView.imageView.image = [UIImage imageNamed:@"tempImage"];
+    }
+    return annotationView;
 }
 
 #pragma UITableViewDelegate
