@@ -125,7 +125,9 @@
 
     if (annotationView == nil) {
         annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        annotationView.imageView.image = [UIImage imageNamed:@"tempImage"];
+        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [(MapAnnotation *)annotation iconUrl], @"64.png"]];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        annotationView.imageView.image = [UIImage imageWithData:imageData];
     }
     return annotationView;
 }

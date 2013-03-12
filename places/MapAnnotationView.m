@@ -16,7 +16,7 @@ const NSInteger kFrameSize = 35;
         self.centerOffset = CGPointMake(0, -kFrameSize / 2);
         self.imageView = [[UIImageView alloc] init];
         self.imageView.frame = CGRectMake(0, 0, kFrameSize + 5, kFrameSize + 5);
-        self.imageView.contentMode = UIViewContentModeCenter;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:self.imageView];
     }
     return self;
