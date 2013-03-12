@@ -5,6 +5,7 @@
 #import "Venue.h"
 #import "MapAnnotation.h"
 #import "MapAnnotationView.h"
+#import "VenueDetailViewController.h"
 
 @interface ExploreViewController ()
 
@@ -132,6 +133,13 @@
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    NSLog(@"callout tapped");
+    VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] init];
+    detailViewController.title = view.annotation.title;
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 #pragma UITableViewDelegate
