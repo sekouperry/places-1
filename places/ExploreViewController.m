@@ -99,7 +99,7 @@
 
         MapAnnotation *annotation = [[MapAnnotation alloc] init];
         annotation.coordinate = location;
-        annotation.name = venue.name;
+        annotation.title = venue.name;
         annotation.iconUrl = venue.iconUrl;
 
         [(MKMapView *)self.mapViewController.view addAnnotation:annotation];
@@ -128,6 +128,8 @@
         NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [(MapAnnotation *)annotation iconUrl], @"64.png"]];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         annotationView.imageView.image = [UIImage imageWithData:imageData];
+        annotationView.canShowCallout = YES;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return annotationView;
 }
