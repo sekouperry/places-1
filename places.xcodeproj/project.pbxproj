@@ -13,6 +13,7 @@
 		6629765216F0CD5000B460AC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629765116F0CD5000B460AC /* Storage.m */; };
 		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
 		6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6629765516F0D3C600B460AC /* Places.xcdatamodeld */; };
+		6629766116F0DA7B00B460AC /* VenueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629766016F0DA7B00B460AC /* VenueDetailView.m */; };
 		6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4416EE453C007FB4C0 /* MapAnnotation.m */; };
 		6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */; };
 		6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6635BC4B16EE6488007FB4C0 /* tempImage.png */; };
@@ -62,6 +63,8 @@
 		6629765116F0CD5000B460AC /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
 		6629765316F0D2FF00B460AC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6629765616F0D3C600B460AC /* Places.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Places.xcdatamodel; sourceTree = "<group>"; };
+		6629765F16F0DA7B00B460AC /* VenueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailView.h; sourceTree = "<group>"; };
+		6629766016F0DA7B00B460AC /* VenueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailView.m; sourceTree = "<group>"; };
 		6635BC4316EE453C007FB4C0 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		6635BC4416EE453C007FB4C0 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationView.h; sourceTree = "<group>"; };
@@ -138,6 +141,10 @@
 		6629765D16F0D9A900B460AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */,
+				6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */,
+				6629765F16F0DA7B00B460AC /* VenueDetailView.h */,
+				6629766016F0DA7B00B460AC /* VenueDetailView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -145,6 +152,8 @@
 		6629765E16F0D9B700B460AC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6635BC4316EE453C007FB4C0 /* MapAnnotation.h */,
+				6635BC4416EE453C007FB4C0 /* MapAnnotation.m */,
 				66E7937016E80512009A9152 /* ListViewController.h */,
 				66E7937116E80512009A9152 /* ListViewController.m */,
 				6685547B16EA952400789F8E /* SearchViewController.h */,
@@ -219,10 +228,6 @@
 				66E7936516E80512009A9152 /* AppDelegate.m */,
 				6629765016F0CD5000B460AC /* Storage.h */,
 				6629765116F0CD5000B460AC /* Storage.m */,
-				6635BC4316EE453C007FB4C0 /* MapAnnotation.h */,
-				6635BC4416EE453C007FB4C0 /* MapAnnotation.m */,
-				6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */,
-				6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */,
 				6612E25816EAB26F00C993CE /* LocationManager.h */,
 				6612E25916EAB26F00C993CE /* LocationManager.m */,
 				6685547516E969D900789F8E /* ApiConnection.h */,
@@ -407,6 +412,7 @@
 				662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */,
 				6629765216F0CD5000B460AC /* Storage.m in Sources */,
 				6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */,
+				6629766116F0DA7B00B460AC /* VenueDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
