@@ -114,6 +114,12 @@
     [self.navigationController presentModalViewController:exploreView animated:YES];
 }
 
+- (void)showDetailViewControllerWithVenue:(Venue *)venue {
+    VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] initWithVenue:venue];
+    detailViewController.title = venue.name;
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
 #pragma MapView Delegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -136,10 +142,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    NSLog(@"%@", [(MapAnnotation *)view.annotation venue]);
-    VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] init];
-    detailViewController.title = [(MapAnnotation *)view.annotation title];
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [self showDetailViewControllerWithVenue:[(MapAnnotation *)view.annotation venue]];
 }
 
 #pragma UITableViewDelegate
@@ -161,6 +164,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.places count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self showDetailViewControllerWithVenue:[self.places objectAtIndex:indexPath.row]];
 }
 
 @end
