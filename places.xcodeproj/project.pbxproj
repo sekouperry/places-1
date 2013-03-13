@@ -10,6 +10,9 @@
 		32FA147EFD414CC1A3BE66F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F32D4231F0DD42369DAE14DD /* libPods.a */; };
 		6612E25A16EAB26F00C993CE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6612E25916EAB26F00C993CE /* LocationManager.m */; };
 		662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662975FE16EFE85000B460AC /* VenueDetailViewController.m */; };
+		6629765216F0CD5000B460AC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629765116F0CD5000B460AC /* Storage.m */; };
+		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
+		6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6629765516F0D3C600B460AC /* Places.xcdatamodeld */; };
 		6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4416EE453C007FB4C0 /* MapAnnotation.m */; };
 		6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */; };
 		6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6635BC4B16EE6488007FB4C0 /* tempImage.png */; };
@@ -55,6 +58,10 @@
 		6612E25916EAB26F00C993CE /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		662975FD16EFE85000B460AC /* VenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailViewController.h; sourceTree = "<group>"; };
 		662975FE16EFE85000B460AC /* VenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailViewController.m; sourceTree = "<group>"; };
+		6629765016F0CD5000B460AC /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
+		6629765116F0CD5000B460AC /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
+		6629765316F0D2FF00B460AC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6629765616F0D3C600B460AC /* Places.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Places.xcdatamodel; sourceTree = "<group>"; };
 		6635BC4316EE453C007FB4C0 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		6635BC4416EE453C007FB4C0 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationView.h; sourceTree = "<group>"; };
@@ -105,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */,
 				66E7939B16E814E4009A9152 /* CoreLocation.framework in Frameworks */,
 				66E7939916E8115F009A9152 /* MapKit.framework in Frameworks */,
 				66E7935616E80512009A9152 /* UIKit.framework in Frameworks */,
@@ -139,6 +147,7 @@
 		66E7934916E80512009A9152 = {
 			isa = PBXGroup;
 			children = (
+				6629765316F0D2FF00B460AC /* CoreData.framework */,
 				6685547E16EA953200789F8E /* Models */,
 				66E7935B16E80512009A9152 /* places */,
 				66E7937F16E80512009A9152 /* placesTests */,
@@ -174,12 +183,15 @@
 		66E7935B16E80512009A9152 /* places */ = {
 			isa = PBXGroup;
 			children = (
+				6629765516F0D3C600B460AC /* Places.xcdatamodeld */,
 				66E7936416E80512009A9152 /* AppDelegate.h */,
 				66E7936516E80512009A9152 /* AppDelegate.m */,
 				66E7939C16E81927009A9152 /* MapViewController.h */,
 				66E7939D16E81927009A9152 /* MapViewController.m */,
 				66E7939016E80CFD009A9152 /* LeftPanelController.h */,
 				66E7939116E80CFD009A9152 /* LeftPanelController.m */,
+				6629765016F0CD5000B460AC /* Storage.h */,
+				6629765116F0CD5000B460AC /* Storage.m */,
 				66E7939316E80D09009A9152 /* CenterPanelController.h */,
 				66E7939416E80D09009A9152 /* CenterPanelController.m */,
 				6685547216E93B0800789F8E /* ExploreViewController.h */,
@@ -376,6 +388,8 @@
 				6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */,
 				6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */,
 				662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */,
+				6629765216F0CD5000B460AC /* Storage.m in Sources */,
+				6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +578,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6629765516F0D3C600B460AC /* Places.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6629765616F0D3C600B460AC /* Places.xcdatamodel */,
+			);
+			currentVersion = 6629765616F0D3C600B460AC /* Places.xcdatamodel */;
+			path = Places.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 66E7934A16E80512009A9152 /* Project object */;
 }

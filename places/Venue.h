@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Venue : NSObject
+@interface Venue : NSManagedObjectModel
 
 //location: {
 //    address: "110 Wall Street"
