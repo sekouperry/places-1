@@ -12,9 +12,9 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 }
 
 + (void)fetchVenueswithLocation:(CLLocationCoordinate2D)location Query:(NSString *)query andCompletionHandler:(void (^)())completion {
-
     NSString *locationParams = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ll=%@&query=%@%@",kApiUrl, locationParams, query,koauth_token]];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ll=%@&query=%@%@",kApiUrl, locationParams, query, koauth_token]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
     [NSURLConnection connectionWithRequest:request delegate:self];
@@ -29,41 +29,18 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
        for (NSDictionary *location in venuesResponse) {
            Venue *venue = [[Venue alloc] init];
            venue.name = [location objectForKey:@"name"];
-           venue.location = [location objectForKey:@"location"];
+           venue.foursquareId = [location objectForKey:@"id"];
 
-           NSDictionary *categoryDictionary = [location objectForKey:@"categories"];
-           if ([categoryDictionary count] >= 1) {
-               NSDictionary *iconDictionary = [categoryDictionary objectForKey:@"icon"];
-               venue.iconUrl = [iconDictionary objectForKey:@"prefix"];
-           }
+           NSDictionary *contactDictionary = [location objectForKey:@"contact"];
+           venue.phoneNumber = [contactDictionary objectForKey:@"formattedPhone"];
 
-           [venues addObject:venue];
-       }
-       completion(venues);
-   }];
-
-}
-
-+ (void)fetchVenuesFromLocation:(CLLocationCoordinate2D)location completionHandler:(void (^)())completion {
-
-    NSString *locationParams = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
-
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ll=%@%@",kApiUrl, locationParams, koauth_token]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
-    [NSURLConnection connectionWithRequest:request delegate:self];
-
-   [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-
-       NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-       NSDictionary *responseDictionary = [jsonDictionary objectForKey:@"response"];
-       NSArray *venuesResponse = [responseDictionary objectForKey:@"venues"];
-
-       NSMutableArray *venues = [[NSMutableArray alloc] init];
-       for (NSDictionary *location in venuesResponse) {
-           Venue *venue = [[Venue alloc] init];
-           venue.name = [location objectForKey:@"name"];
-           venue.location = [location objectForKey:@"location"];
+           NSDictionary *locationDictionary = [location objectForKey:@"location"];
+           venue.address = [locationDictionary objectForKey:@"address"];
+           venue.lat = [locationDictionary objectForKey:@"lat"];
+           venue.lng = [locationDictionary objectForKey:@"lng"];
+           venue.city = [locationDictionary objectForKey:@"city"];
+           venue.state = [locationDictionary objectForKey:@"state"];
+           venue.country = [locationDictionary objectForKey:@"country"];
 
            NSArray *categoryDictionary = [location objectForKey:@"categories"];
            if ([categoryDictionary count] >= 1) {
@@ -75,5 +52,9 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
        }
        completion(venues);
    }];
+}
+
++ (void)fetchVenuesFromLocation:(CLLocationCoordinate2D)location completionHandler:(void (^)())completion {
+    [self fetchVenueswithLocation:location Query:@"" andCompletionHandler:completion];
 }
 @end

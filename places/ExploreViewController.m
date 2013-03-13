@@ -95,8 +95,8 @@
 - (void)plotPlaces {
     for (Venue *venue in self.places) {
         CLLocationCoordinate2D location;
-        location.latitude = [[venue.location objectForKey:@"lat"] doubleValue];
-        location.longitude = [[venue.location objectForKey:@"lng"] doubleValue];
+        location.latitude = [venue.lat floatValue];
+        location.longitude = [venue.lng floatValue];
 
         MapAnnotation *annotation = [[MapAnnotation alloc] init];
         annotation.coordinate = location;
