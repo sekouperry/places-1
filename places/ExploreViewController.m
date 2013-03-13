@@ -99,9 +99,9 @@
         location.longitude = [venue.lng floatValue];
 
         MapAnnotation *annotation = [[MapAnnotation alloc] init];
-        annotation.coordinate = location;
         annotation.title = venue.name;
-        annotation.iconUrl = venue.iconUrl;
+        annotation.coordinate = location;
+        annotation.venue = venue;
 
         [(MKMapView *)self.mapViewController.view addAnnotation:annotation];
     }
@@ -126,7 +126,7 @@
 
     if (annotationView == nil) {
         annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [(MapAnnotation *)annotation iconUrl], @"64.png"]];
+        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [[(MapAnnotation *)annotation venue] iconUrl], @"64.png"]];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         annotationView.imageView.image = [UIImage imageWithData:imageData];
         annotationView.canShowCallout = YES;
@@ -136,8 +136,9 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    NSLog(@"%@", [(MapAnnotation *)view.annotation venue]);
     VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] init];
-    detailViewController.title = view.annotation.title;
+    detailViewController.title = [(MapAnnotation *)view.annotation title];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
