@@ -135,6 +135,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6629765D16F0D9A900B460AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		6629765E16F0D9B700B460AC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				66E7937016E80512009A9152 /* ListViewController.h */,
+				66E7937116E80512009A9152 /* ListViewController.m */,
+				6685547B16EA952400789F8E /* SearchViewController.h */,
+				6685547C16EA952500789F8E /* SearchViewController.m */,
+				66E7939316E80D09009A9152 /* CenterPanelController.h */,
+				66E7939416E80D09009A9152 /* CenterPanelController.m */,
+				6685547216E93B0800789F8E /* ExploreViewController.h */,
+				6685547316E93B0800789F8E /* ExploreViewController.m */,
+				662975FD16EFE85000B460AC /* VenueDetailViewController.h */,
+				662975FE16EFE85000B460AC /* VenueDetailViewController.m */,
+				66E7939C16E81927009A9152 /* MapViewController.h */,
+				66E7939D16E81927009A9152 /* MapViewController.m */,
+				66E7939016E80CFD009A9152 /* LeftPanelController.h */,
+				66E7939116E80CFD009A9152 /* LeftPanelController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		6685547E16EA953200789F8E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,13 +170,13 @@
 				6685547916EA4C2300789F8E /* Venue.m */,
 			);
 			name = Models;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		66E7934916E80512009A9152 = {
 			isa = PBXGroup;
 			children = (
 				6629765316F0D2FF00B460AC /* CoreData.framework */,
-				6685547E16EA953200789F8E /* Models */,
 				66E7935B16E80512009A9152 /* places */,
 				66E7937F16E80512009A9152 /* placesTests */,
 				66E7935416E80512009A9152 /* Frameworks */,
@@ -183,33 +211,22 @@
 		66E7935B16E80512009A9152 /* places */ = {
 			isa = PBXGroup;
 			children = (
+				6685547E16EA953200789F8E /* Models */,
+				6629765D16F0D9A900B460AC /* Views */,
+				6629765E16F0D9B700B460AC /* Controllers */,
 				6629765516F0D3C600B460AC /* Places.xcdatamodeld */,
 				66E7936416E80512009A9152 /* AppDelegate.h */,
 				66E7936516E80512009A9152 /* AppDelegate.m */,
-				66E7939C16E81927009A9152 /* MapViewController.h */,
-				66E7939D16E81927009A9152 /* MapViewController.m */,
-				66E7939016E80CFD009A9152 /* LeftPanelController.h */,
-				66E7939116E80CFD009A9152 /* LeftPanelController.m */,
 				6629765016F0CD5000B460AC /* Storage.h */,
 				6629765116F0CD5000B460AC /* Storage.m */,
-				66E7939316E80D09009A9152 /* CenterPanelController.h */,
-				66E7939416E80D09009A9152 /* CenterPanelController.m */,
-				6685547216E93B0800789F8E /* ExploreViewController.h */,
-				6685547316E93B0800789F8E /* ExploreViewController.m */,
-				662975FD16EFE85000B460AC /* VenueDetailViewController.h */,
-				662975FE16EFE85000B460AC /* VenueDetailViewController.m */,
 				6635BC4316EE453C007FB4C0 /* MapAnnotation.h */,
 				6635BC4416EE453C007FB4C0 /* MapAnnotation.m */,
 				6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */,
 				6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */,
-				6685547B16EA952400789F8E /* SearchViewController.h */,
-				6685547C16EA952500789F8E /* SearchViewController.m */,
 				6612E25816EAB26F00C993CE /* LocationManager.h */,
 				6612E25916EAB26F00C993CE /* LocationManager.m */,
 				6685547516E969D900789F8E /* ApiConnection.h */,
 				6685547616E969D900789F8E /* ApiConnection.m */,
-				66E7937016E80512009A9152 /* ListViewController.h */,
-				66E7937116E80512009A9152 /* ListViewController.m */,
 				66E7935C16E80512009A9152 /* Supporting Files */,
 			);
 			path = places;
