@@ -7,6 +7,7 @@ const NSInteger kEdgeInset = 10;
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 100)];
         _imageView.backgroundColor = [UIColor redColor];
 
