@@ -8,9 +8,8 @@
     self.venue = venue;
     self.view.backgroundColor = [UIColor whiteColor];
     _detailView = [[VenueDetailView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    _detailView.openingHoursLabel.text = self.venue.openingHours;
-    NSLog(@"%@", venue.name);
-    NSLog(@"%@", self.venue.openingHours);
+    _detailView.nameLabel.numberOfLines = 2;
+    _detailView.nameLabel.text = [NSString stringWithFormat:@"%@\n %@", venue.name, venue.address];
     [self.view addSubview:_detailView];
     return self;
 }
