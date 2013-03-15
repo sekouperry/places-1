@@ -2,6 +2,7 @@
 #import "Venue.h"
 #import "ApiConnection.h"
 
+NSString *const kPhotoApiPrefix = @"https://api.foursquare.com/v2/venues/";
 NSString *const kApiUrl = @"https://api.foursquare.com/v2/venues/search?";
 NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQKYOW32WLYTADZCB&v=20130307";
 @implementation ApiConnection
@@ -17,9 +18,11 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ll=%@&query=%@%@",kApiUrl, locationParams, query, koauth_token]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
-    [NSURLConnection connectionWithRequest:request delegate:self];
 
    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+       if (error) {
+           NSLog(@"Error fetching venue location %@", error.userInfo);
+       }
 
        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
        NSDictionary *responseDictionary = [jsonDictionary objectForKey:@"response"];
@@ -57,4 +60,20 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 + (void)fetchVenuesFromLocation:(CLLocationCoordinate2D)location completionHandler:(void (^)())completion {
     [self fetchVenueswithLocation:location Query:@"" andCompletionHandler:completion];
 }
+
++ (void)fetchPhotosFromVenue:(NSString *)venueId completionHandler:(void (^)())completion {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+
+        NSDictionary *responseDictionary = [jsonResponse objectForKey:@"response"];
+        NSDictionary *venueDictionary = [responseDictionary objectForKey:@"venue"];
+        NSDictionary *photoDictionary = [venueDictionary objectForKey:@"photos"];
+        NSDictionary *firstImageDictionary = [[[[photoDictionary objectForKey:@"groups"] lastObject] objectForKey:@"items"] firstObject];
+        completion(firstImageDictionary);
+    }];
+}
+
 @end
