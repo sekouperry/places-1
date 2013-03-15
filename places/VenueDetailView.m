@@ -9,10 +9,12 @@ const NSInteger kEdgeInset = 10;
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 100)];
-        _imageView.backgroundColor = [UIColor redColor];
+        _imageView.backgroundColor = [UIColor lightGrayColor];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
 
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_imageView.frame) + kEdgeInset, CGRectGetMaxY(_imageView.frame)+ kEdgeInset, CGRectGetWidth(self.frame)- kEdgeInset*2, 40)];
-        _nameLabel.backgroundColor = [UIColor blueColor];
+        _nameLabel.backgroundColor = [UIColor lightGrayColor];
 
         _addToListButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         _addToListButton.frame = CGRectMake(CGRectGetMinX(_nameLabel.frame), CGRectGetMaxY(_nameLabel.frame) + kEdgeInset, 150, 30);

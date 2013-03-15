@@ -1,5 +1,8 @@
 #import "VenueDetailViewController.h"
 #import "VenueDetailView.h"
+#import "ApiConnection.h"
+
+static const NSString *kPhotoSize = @"width500";
 
 @implementation VenueDetailViewController
 
@@ -16,6 +19,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- }
+    void (^completionBlock)(NSDictionary *) = ^(NSDictionary *photo){
+        self.venuePhotoDetails = photo;
+        [self displayImage];
+        
+    };
+    [ApiConnection fetchPhotosFromVenue:self.venue.foursquareId completionHandler:completionBlock];
+}
+
+- (void)displayImage {
+    NSString *photoURL = [NSString stringWithFormat:@"%@%@%@", [self.venuePhotoDetails objectForKey:@"prefix"], kPhotoSize, [self.venuePhotoDetails objectForKey:@"suffix"]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
+    _detailView.imageView.image = image;
+}
 
 @end

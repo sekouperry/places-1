@@ -6,6 +6,7 @@
 
 @property (strong, nonatomic) Venue *venue;
 @property (strong, nonatomic) VenueDetailView *detailView;
+@property (strong, nonatomic) NSDictionary *venuePhotoDetails;
 
 - (id)initWithVenue:(Venue *)venue;
 
