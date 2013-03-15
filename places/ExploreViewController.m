@@ -57,7 +57,6 @@
     [self requestLocations];
 }
 
-
 - (void)hideTable {
     self.hideTableButton.hidden = YES;
     [UIView animateWithDuration:0.2 animations:^{
@@ -168,6 +167,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self showDetailViewControllerWithVenue:[self.places objectAtIndex:indexPath.row]];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
