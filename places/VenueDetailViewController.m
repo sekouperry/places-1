@@ -71,5 +71,4 @@ static const NSString *kPhotoSize = @"width500";
     return annotationView;
 }
 
-
 @end

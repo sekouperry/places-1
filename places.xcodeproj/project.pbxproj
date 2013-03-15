@@ -14,6 +14,7 @@
 		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
 		6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6629765516F0D3C600B460AC /* Places.xcdatamodeld */; };
 		6629766116F0DA7B00B460AC /* VenueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629766016F0DA7B00B460AC /* VenueDetailView.m */; };
+		6629767216F3AFA800B460AC /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629767116F3AFA700B460AC /* List.m */; };
 		6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4416EE453C007FB4C0 /* MapAnnotation.m */; };
 		6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */; };
 		6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6635BC4B16EE6488007FB4C0 /* tempImage.png */; };
@@ -65,6 +66,8 @@
 		6629765616F0D3C600B460AC /* Places.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Places.xcdatamodel; sourceTree = "<group>"; };
 		6629765F16F0DA7B00B460AC /* VenueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailView.h; sourceTree = "<group>"; };
 		6629766016F0DA7B00B460AC /* VenueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailView.m; sourceTree = "<group>"; };
+		6629767016F3AFA700B460AC /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = List.h; path = places/List.h; sourceTree = "<group>"; };
+		6629767116F3AFA700B460AC /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = List.m; path = places/List.m; sourceTree = "<group>"; };
 		6635BC4316EE453C007FB4C0 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		6635BC4416EE453C007FB4C0 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationView.h; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 			children = (
 				6685547816EA4C2300789F8E /* Venue.h */,
 				6685547916EA4C2300789F8E /* Venue.m */,
+				6629767016F3AFA700B460AC /* List.h */,
+				6629767116F3AFA700B460AC /* List.m */,
 			);
 			name = Models;
 			path = ..;
@@ -413,6 +418,7 @@
 				6629765216F0CD5000B460AC /* Storage.m in Sources */,
 				6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */,
 				6629766116F0DA7B00B460AC /* VenueDetailView.m in Sources */,
+				6629767216F3AFA800B460AC /* List.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
