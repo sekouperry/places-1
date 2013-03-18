@@ -15,21 +15,11 @@
     // handle error case!
 }
 
-- (NSFetchedResultsController *)fetchedResultsController {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"List" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]]];
-
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    [request setSortDescriptors:@[sort]];
-
-   _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[Storage sharedStorage] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
-
-    _fetchedResultsController.delegate = self;
-    return _fetchedResultsController;
+- (void)viewDidAppear:(BOOL)animated {
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPress.minimumPressDuration = 1.5;
+    longPress.delegate = self;
+    [self.tableView addGestureRecognizer:longPress];
 }
 
 - (id)init {
@@ -54,12 +44,63 @@
     return self;
 }
 
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"List" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]]];
+
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:@[sort]];
+
+   _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[Storage sharedStorage] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+
+    _fetchedResultsController.delegate = self;
+    return _fetchedResultsController;
+}
+
 - (void)newList {
     List *newList = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]];
     newList.name = @"New list";
     NSError *error;
     [[[Storage sharedStorage] managedObjectContext] save:&error];
     [self.tableView reloadData];
+}
+
+- (void)handleLongPress:(UIGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gesture locationInView:self.tableView];
+        NSIndexPath *indexpath = [self.tableView indexPathForRowAtPoint:point];
+        [self.tableView  deselectRowAtIndexPath:indexpath animated:YES];
+        self.editingCellIndex = indexpath;
+        if (indexpath != nil) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.editingCellIndex];
+
+            self.editingCellTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 200, 30)];
+            self.editingCellTextField.delegate = self;
+            self.editingCellTextField.backgroundColor = [UIColor whiteColor];
+            self.editingCellTextField.font = [UIFont boldSystemFontOfSize:20];
+            self.editingCellTextField.text = cell.textLabel.text;
+            [cell addSubview:self.editingCellTextField];
+            [self.editingCellTextField becomeFirstResponder];
+        }
+    }
+}
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.editingCellIndex];
+    cell.textLabel.text = textField.text;
+    List *list = [self.fetchedResultsController objectAtIndexPath:self.editingCellIndex];
+    list.name = textField.text;
+    NSError *error;
+    [[[Storage sharedStorage] managedObjectContext] save:&error];
+    [textField resignFirstResponder];
+    [self.editingCellTextField removeFromSuperview];
+    return YES;
 }
 
 #pragma mark FetchedResultsController Delegate
@@ -98,8 +139,6 @@
     [self.tableView endUpdates];
 }
 
-
-
 #pragma mark TableView Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,12 +168,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        [self newList];
-    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
