@@ -59,4 +59,9 @@
     [self.mapViewController focusCurrentLocationWithDistance:500.0];
 }
 
+- (void)setActiveList:(List *)list {
+    NSLog(@"delgate method called");
+    self.currentList = list;
+}
+
 @end

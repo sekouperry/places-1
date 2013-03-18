@@ -11,6 +11,9 @@
     self.viewController.leftPanel = [[LeftPanelController alloc] init];
     self.viewController.centerPanel = [[UINavigationController alloc] initWithRootViewController:[[CenterPanelController alloc] init]];
 
+    // Set left panel delegate to center panel to pass the active list.
+    [(LeftPanelController *)self.viewController.leftPanel setDelegate:[[(UINavigationController *)self.viewController.centerPanel viewControllers] objectAtIndex:0]];
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

@@ -1,12 +1,15 @@
 #import "LeftPanelController.h"
-#import "List.h"
 #import "Storage.h"
+#import "CenterPanelController.h"
+#import <JASidePanelController.h>
+#import <UIViewController+JASidePanel.h>
 
 @interface LeftPanelController ()
 
 @end
 
 @implementation LeftPanelController
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,9 +34,8 @@
     self.tableView.dataSource = self;
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    headerView.backgroundColor = [UIColor redColor];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(5, 5, 100, 40);
+    button.frame = CGRectMake(5, 5, 150, 40);
     [button setTitle:@"Create new list" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(newList) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:button];
@@ -181,6 +183,11 @@
         NSError *error;
         [[[Storage sharedStorage] managedObjectContext] save:&error];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.sidePanelController showCenterPanelAnimated:YES];
+    [self.delegate setActiveList:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
 @end
