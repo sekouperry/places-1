@@ -10,43 +10,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSError *error = nil;
-    if (![self.fetchResultsController performFetch:&error]) {
-        NSLog(@"Error fetching core data inside leftPanelController");
-        exit(-1);
-    }
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    // handle error case!
 }
 
-- (void)viewDidUnload {
-    self.fetchResultsController = nil;
-}
-
-- (NSFetchedResultsController *)fetchResultsController {
-    if (_fetchResultsController != nil) {
-        return _fetchResultsController;
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
     }
 
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"List"];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"List" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]]];
 
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:@[sort]];
 
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"List" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]];
-    [fetchRequest setSortDescriptors:@[sort]];
-    [fetchRequest setEntity:entity];
+   _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[[Storage sharedStorage] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
 
-    _fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[Storage sharedStorage] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
-    _fetchResultsController.delegate = self;
-    return _fetchResultsController;
+    _fetchedResultsController.delegate = self;
+    return _fetchedResultsController;
 }
 
 - (id)init {
     self = [super init];
     self.view.frame = CGRectMake(0, 0, 360, 480);
     self.view.backgroundColor = [UIColor grayColor];
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 255, 480)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+    headerView.backgroundColor = [UIColor redColor];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(5, 5, 100, 40);
+    [button setTitle:@"Create new list" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(newList) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:button];
+
     [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = headerView;
 
     return self;
 }
@@ -56,8 +59,45 @@
     newList.name = @"New list";
     NSError *error;
     [[[Storage sharedStorage] managedObjectContext] save:&error];
-    NSLog(@"%@", newList);
+    [self.tableView reloadData];
 }
+
+#pragma mark FetchedResultsController Delegate
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
 
 
 #pragma mark TableView Methods
@@ -69,86 +109,45 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    if (indexPath.section == 0) {
-        cell.textLabel.text = @"Create a new list";
-        return cell;
-    }
 
-    List *list = [[self.fetchResultsController fetchedObjects] objectAtIndex:indexPath.row];
-    cell.textLabel.text = list.name;
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    List *list = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = list.name;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return nil;
-    }
     return @"Lists";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    }
-    return [[self.fetchResultsController fetchedObjects] count];
+    return [[[self.fetchedResultsController sections] objectAtIndex:section] numberOfObjects];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return [[self.fetchedResultsController sections] count];
 }
 
-#pragma mark NSFetchedResults Delegate 
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-}
- 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
- 
-    UITableView *tableView = self.tableView;
- 
-    switch(type) {
- 
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
- 
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
- 
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
- 
-        case NSFetchedResultsChangeMove:
-           [tableView deleteRowsAtIndexPaths:[NSArray
-arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-           [tableView insertRowsAtIndexPaths:[NSArray
-arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-           break;
-    }
-}
- 
- 
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
- 
-    switch(type) {
- 
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
- 
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        [self newList];
     }
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
-    [self.tableView endUpdates];
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        List *list = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [[[Storage sharedStorage] managedObjectContext] deleteObject:list];
+        NSError *error;
+        [[[Storage sharedStorage] managedObjectContext] save:&error];
+    }
+}
 
 @end

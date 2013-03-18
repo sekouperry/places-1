@@ -4,6 +4,6 @@
 @interface LeftPanelController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSFetchedResultsController *fetchResultsController;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
