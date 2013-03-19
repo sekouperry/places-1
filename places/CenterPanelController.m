@@ -27,7 +27,7 @@
     self.view.frame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem *toggleMapButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(toggleMap:)];
-    UIBarButtonItem *addLocationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addLocation)];
+    UIBarButtonItem *addLocationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(exploreLocations)];
     self.navigationItem.rightBarButtonItems = @[toggleMapButton, addLocationButton];
 
     [self addObserver:self forKeyPath:@"currentList" options:NSKeyValueObservingOptionNew context:nil];
@@ -45,7 +45,7 @@
     self.mapShowing = YES;
 }
 
-- (void)addLocation {
+- (void)exploreLocations {
     if (self.mapShowing) {
         if (!self.currentList) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No List selected" message:@"Select a list to use" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
