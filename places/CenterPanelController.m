@@ -1,6 +1,8 @@
 #import "CenterPanelController.h"
 #import "ListViewController.h"
 #import "ExploreViewController.h"
+#import "MapAnnotation.h"
+#import "Venue.h"
 
 @interface CenterPanelController ()
 
@@ -45,6 +47,23 @@
     self.mapShowing = YES;
 }
 
+- (void)plotPlaces {
+    NSArray *currentAnnotations = [self.mapViewController.mapView annotations];
+    [self.mapViewController.mapView removeAnnotations:currentAnnotations];
+    for (Venue *venue in self.currentList.venues) {
+        CLLocationCoordinate2D location;
+        location.latitude = [venue.lat floatValue];
+        location.longitude = [venue.lng floatValue];
+
+        MapAnnotation *annotation = [[MapAnnotation alloc] init];
+        annotation.title = venue.name;
+        annotation.coordinate = location;
+        annotation.venue = venue;
+
+        [self.mapViewController.mapView addAnnotation:annotation];
+    }
+}
+
 - (void)exploreLocations {
     if (self.mapShowing) {
         if (!self.currentList) {
@@ -81,6 +100,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"currentList"]) {
         self.navigationItem.title = self.currentList.name;
+        [self plotPlaces];
     }
 }
 
