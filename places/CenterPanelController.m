@@ -2,7 +2,9 @@
 #import "ListViewController.h"
 #import "ExploreViewController.h"
 #import "MapAnnotation.h"
+#import "MapAnnotationView.h"
 #import "Venue.h"
+#import "VenueDetailViewController.h"
 
 @interface CenterPanelController ()
 
@@ -36,6 +38,7 @@
     self.listView = [[ListViewController alloc] init];
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = [[UIScreen mainScreen] bounds];
+    self.mapViewController.mapView.delegate = self;
     [self.view addSubview:self.mapViewController.view];
 
     self.centerMapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -102,6 +105,46 @@
         self.navigationItem.title = self.currentList.name;
         [self plotPlaces];
     }
+}
+
+- (void)showDetailViewControllerWithVenue:(Venue *)venue {
+    VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] initWithVenue:venue];
+    detailViewController.currentList = self.currentList;
+    detailViewController.title = venue.name;
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
+#pragma MapView Delegate
+
+- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView {
+    NSLog(@"location user");
+}
+
+- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView {
+    NSLog(@"stopped locating user");
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+
+    static NSString *identifier = @"AnnotationIdentifier";
+    MapAnnotationView *annotationView = (MapAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+
+    if (annotationView == nil) {
+        annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [[(MapAnnotation *)annotation venue] iconUrl], @"64.png"]];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        annotationView.imageView.image = [UIImage imageWithData:imageData];
+        annotationView.canShowCallout = YES;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    }
+    return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    [self showDetailViewControllerWithVenue:[(MapAnnotation *)view.annotation venue]];
 }
 
 @end

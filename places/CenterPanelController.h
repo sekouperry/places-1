@@ -4,7 +4,7 @@
 #import "List.h"
 #import "LeftPanelController.h"
 
-@interface CenterPanelController : UIViewController <LeftPanelDelegate>
+@interface CenterPanelController : UIViewController <LeftPanelDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) MapViewController *mapViewController;
 @property (strong, nonatomic) ListViewController *listView;
