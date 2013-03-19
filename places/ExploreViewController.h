@@ -1,5 +1,6 @@
-#import <UIKit/UIKit.h>
 #import "MapViewController.h"
+#import "List.h"
+#import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
 @interface ExploreViewController : UIViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
@@ -14,5 +15,6 @@
 @property (nonatomic) CGRect originalTableRect;
 
 @property (strong, nonatomic) NSMutableArray *places;
+@property (strong, nonatomic) List *currentList;
 
 @end

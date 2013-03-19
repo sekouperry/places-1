@@ -3,6 +3,7 @@
 #import "ApiConnection.h"
 #import "MapAnnotation.h"
 #import "MapAnnotationView.h"
+#import "Storage.h"
 
 static const NSString *kPhotoSize = @"width500";
 
@@ -11,18 +12,28 @@ static const NSString *kPhotoSize = @"width500";
 - (id)initWithVenue:(Venue *)venue {
     self = [super init];
     self.venue = venue;
+    return self;
+}
+
+- (void)loadView {
+    [super loadView];
     self.view.backgroundColor = [UIColor whiteColor];
     _detailView = [[VenueDetailView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _detailView.nameLabel.numberOfLines = 2;
-    _detailView.nameLabel.text = [NSString stringWithFormat:@"%@\n %@", venue.name, venue.address];
+    _detailView.nameLabel.text = [NSString stringWithFormat:@"%@\n %@", self.venue.name, self.venue.address];
     _detailView.mapView.delegate = self;
+    [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
     [self scopeMapToVenue];
     [self.view addSubview:_detailView];
-    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([self alreadySaved]) {
+        _detailView.addToListButton.titleLabel.text = @"Remove from list";
+        _detailView.addToListButton.enabled = NO;
+    }
+
     void (^completionBlock)(NSDictionary *) = ^(NSDictionary *photo){
         self.venuePhotoDetails = photo;
         [self displayImage];
@@ -48,6 +59,25 @@ static const NSString *kPhotoSize = @"width500";
     [self.detailView.mapView addAnnotation:annotation];
 
     self.detailView.mapView.region = MKCoordinateRegionMakeWithDistance(location, 200, 200);
+}
+
+- (void)addToList {
+    [[[Storage sharedStorage] managedObjectContext] insertObject:self.venue];
+    NSMutableSet *venues = [self.currentList mutableSetValueForKey:@"venues"];
+    [venues addObject:self.venue];
+    NSError *error;
+    [[[Storage sharedStorage] managedObjectContext] save:&error];
+    _detailView.addToListButton.enabled = NO;
+}
+
+- (BOOL)alreadySaved {
+    NSSet *savedVenues = self.currentList.venues;
+    for (Venue *venue in savedVenues) {
+        if ([venue.foursquareId isEqualToString:self.venue.foursquareId]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark MapView Delegate

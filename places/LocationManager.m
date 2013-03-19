@@ -26,8 +26,4 @@
     NSLog(@"failed to find location %@", error);
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    NSLog(@"Location managaer did update location");
-}
-
 @end

@@ -1,6 +1,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Venue.h"
 #import "ApiConnection.h"
+#import "Storage.h"
 
 NSString *const kPhotoApiPrefix = @"https://api.foursquare.com/v2/venues/";
 NSString *const kApiUrl = @"https://api.foursquare.com/v2/venues/search?";
@@ -30,7 +31,10 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 
        NSMutableArray *venues = [[NSMutableArray alloc] init];
        for (NSDictionary *location in venuesResponse) {
-           Venue *venue = [[Venue alloc] init];
+           NSEntityDescription *venueEntity = [NSEntityDescription entityForName:@"Venue" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]];
+
+           Venue *venue = [[Venue alloc] initWithEntity:venueEntity insertIntoManagedObjectContext:nil];
+           
            venue.name = [location objectForKey:@"name"];
            venue.foursquareId = [location objectForKey:@"id"];
 
@@ -39,8 +43,8 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 
            NSDictionary *locationDictionary = [location objectForKey:@"location"];
            venue.address = [locationDictionary objectForKey:@"address"];
-           venue.lat = [locationDictionary objectForKey:@"lat"];
-           venue.lng = [locationDictionary objectForKey:@"lng"];
+           venue.lat = [[locationDictionary objectForKey:@"lat"] stringValue];
+           venue.lng = [[locationDictionary objectForKey:@"lng"] stringValue];
            venue.city = [locationDictionary objectForKey:@"city"];
            venue.state = [locationDictionary objectForKey:@"state"];
            venue.country = [locationDictionary objectForKey:@"country"];
@@ -48,7 +52,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
            NSArray *categoryDictionary = [location objectForKey:@"categories"];
            if ([categoryDictionary count] >= 1) {
                NSDictionary *iconDictionary = [[categoryDictionary objectAtIndex:0] objectForKey:@"icon"];
-               venue.iconUrl = [iconDictionary objectForKey:@"prefix"];
+               [venue setIconUrl:[iconDictionary objectForKey:@"prefix"]];
            }
 
            [venues addObject:venue];

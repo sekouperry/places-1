@@ -1,8 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@interface Venue : NSManagedObjectModel
-
+@interface Venue : NSManagedObject
 //location: {
 //    address: "110 Wall Street"
 //    lat: 40.700150079671246
@@ -28,5 +27,6 @@
 @property (strong, nonatomic) NSString *phoneNumber;
 @property (strong, nonatomic) NSString *iconUrl;
 
+@property (strong, nonatomic) NSSet *lists;
 
 @end

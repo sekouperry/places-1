@@ -115,6 +115,7 @@
 
 - (void)showDetailViewControllerWithVenue:(Venue *)venue {
     VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] initWithVenue:venue];
+    detailViewController.currentList = self.currentList;
     detailViewController.title = venue.name;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }

@@ -13,6 +13,14 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.mapShowing = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"%@ has %d venues", [self.currentList name], [self.currentList.venues count]);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -22,6 +30,7 @@
     UIBarButtonItem *addLocationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addLocation)];
     self.navigationItem.rightBarButtonItems = @[toggleMapButton, addLocationButton];
 
+    [self addObserver:self forKeyPath:@"currentList" options:NSKeyValueObservingOptionNew context:nil];
     self.listView = [[ListViewController alloc] init];
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = [[UIScreen mainScreen] bounds];
@@ -38,19 +47,25 @@
 
 - (void)addLocation {
     if (self.mapShowing) {
+        if (!self.currentList) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No List selected" message:@"Select a list to use" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
         ExploreViewController *exploreViewController = [[ExploreViewController alloc] init];
+        exploreViewController.currentList = self.currentList;
         [self.navigationController pushViewController:exploreViewController animated:YES];
     }
 }
 
 - (void)toggleMap:(id)sender {
     if (self.mapShowing) {
-        [UIView transitionFromView:self.view toView:self.listView.view duration:1.0 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
+        self.listView.currentList = self.currentList;
+        [UIView animateWithDuration:0.5 animations:^{
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            [self.navigationController pushViewController:self.listView animated:NO];
+            [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
             self.mapShowing = NO;
-        }];
-    } else {
-        [UIView transitionFromView:self.listView.view toView:self.view duration:1.0 options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
-            self.mapShowing = YES;
         }];
     }
 }
@@ -61,6 +76,12 @@
 
 - (void)setActiveList:(List *)list {
     self.currentList = list;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([keyPath isEqualToString:@"currentList"]) {
+        self.navigationItem.title = self.currentList.name;
+    }
 }
 
 @end
