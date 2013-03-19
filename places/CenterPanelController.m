@@ -10,6 +10,11 @@
 
 - (id)init {
     self = [super init];
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
     self.view.frame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -21,19 +26,14 @@
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = [[UIScreen mainScreen] bounds];
     [self.view addSubview:self.mapViewController.view];
-    [self.mapViewController focusCurrentLocationWithDistance:500.0];
-    self.mapShowing = YES;
 
     self.centerMapButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.centerMapButton.frame = CGRectMake(20, 330, 40, 40);
     [self.centerMapButton addTarget:self action:@selector(centerMap) forControlEvents:UIControlEventTouchUpInside];
     [self.mapViewController.view addSubview:self.centerMapButton];
 
-    return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    [self.mapViewController focusCurrentLocationWithDistance:500.0];
+    self.mapShowing = YES;
 }
 
 - (void)addLocation {
@@ -60,7 +60,6 @@
 }
 
 - (void)setActiveList:(List *)list {
-    NSLog(@"delgate method called");
     self.currentList = list;
 }
 

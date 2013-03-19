@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface LocationManager : CLLocationManager
+@interface LocationManager : CLLocationManager <CLLocationManagerDelegate>
 
 + (id)sharedLocation;
 

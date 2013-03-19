@@ -38,7 +38,7 @@
 
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = mapRect;
-    [(MKMapView *)self.mapViewController.view setDelegate:self];
+    self.mapViewController.mapView.delegate = self;
 
     self.tableView = [[UITableView alloc] initWithFrame:tableRect];
     self.tableView.delegate = self;
@@ -102,7 +102,7 @@
         annotation.coordinate = location;
         annotation.venue = venue;
 
-        [(MKMapView *)self.mapViewController.view addAnnotation:annotation];
+        [self.mapViewController.mapView addAnnotation:annotation];
     }
 }
 
@@ -120,6 +120,14 @@
 }
 
 #pragma MapView Delegate
+
+- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView {
+    NSLog(@"location user");
+}
+
+- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView {
+    NSLog(@"stopped locating user");
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {

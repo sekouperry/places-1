@@ -7,17 +7,16 @@
 
 @implementation MapViewController
 
-- (id)init {
-    self = [super init];
-    self.view = [[MKMapView alloc] init];
-    [(MKMapView *)self.view setShowsUserLocation:YES];
-    return self;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    [self.view addSubview:self.mapView];
+    [self.mapView setShowsUserLocation:YES];
 }
 
 - (void)focusCurrentLocationWithDistance:(double)distance {
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance([[LocationManager sharedLocation] location].coordinate, distance, distance);
-    [(MKMapView *)self.view setRegion:viewRegion];
-    
+    [self.mapView setRegion:viewRegion];
 }
 
 @end
