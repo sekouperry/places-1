@@ -45,7 +45,10 @@ static const NSString *kPhotoSize = @"width500";
 - (void)displayImage {
     NSString *photoURL = [NSString stringWithFormat:@"%@%@%@", [self.venuePhotoDetails objectForKey:@"prefix"], kPhotoSize, [self.venuePhotoDetails objectForKey:@"suffix"]];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]]];
-    _detailView.imageView.image = image;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _detailView.imageView.image = image;
+    });
 }
 
 - (void)scopeMapToVenue {
