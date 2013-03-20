@@ -20,6 +20,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
 
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
        if (error) {
            NSLog(@"Error fetching venue location %@", error.userInfo);
@@ -58,6 +59,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
            [venues addObject:venue];
        }
        completion(venues);
+       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
    }];
 }
 
@@ -69,6 +71,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
 
@@ -77,6 +80,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
         NSDictionary *photoDictionary = [venueDictionary objectForKey:@"photos"];
         NSDictionary *firstImageDictionary = [[[[photoDictionary objectForKey:@"groups"] lastObject] objectForKey:@"items"] firstObject];
         completion(firstImageDictionary);
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
 }
 
