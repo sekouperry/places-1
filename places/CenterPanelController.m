@@ -5,6 +5,7 @@
 #import "MapAnnotationView.h"
 #import "Venue.h"
 #import "VenueDetailViewController.h"
+#import "Storage.h"
 
 @interface CenterPanelController ()
 
@@ -19,10 +20,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.mapShowing = YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"%@ has %d venues", [self.currentList name], [self.currentList.venues count]);
 }
 
 - (void)viewDidLoad {
@@ -48,6 +45,17 @@
 
     [self.mapViewController focusCurrentLocationWithDistance:500.0];
     self.mapShowing = YES;
+
+    [self getPreviousList];
+}
+
+- (void)getPreviousList {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSURL *activeList = [userDefaults URLForKey:kSelectedList];
+    if (activeList != nil) {
+        NSManagedObjectID *objectId = [[[Storage sharedStorage] persistentStoreCoordinator] managedObjectIDForURIRepresentation:activeList];
+        self.currentList = (List *)[[[Storage sharedStorage] managedObjectContext] objectWithID:objectId];
+    }
 }
 
 - (void)plotPlaces {

@@ -9,6 +9,8 @@
 
 @end
 
+static NSString * const kSelectedList = @"SelectedList";
+
 @interface LeftPanelController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate> {
     id <LeftPanelDelegate> delegate;
 }

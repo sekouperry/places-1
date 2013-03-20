@@ -8,6 +8,7 @@
 
 @end
 
+
 @implementation LeftPanelController
 @synthesize delegate;
 
@@ -186,6 +187,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSURL *selectedListUri = [[[self.fetchedResultsController objectAtIndexPath:indexPath] objectID] URIRepresentation];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setURL:selectedListUri forKey:kSelectedList];
+    [defaults synchronize];
     [self.sidePanelController showCenterPanelAnimated:YES];
     [self.delegate setActiveList:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
