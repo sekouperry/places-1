@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		32FA147EFD414CC1A3BE66F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F32D4231F0DD42369DAE14DD /* libPods.a */; };
 		6612E25A16EAB26F00C993CE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6612E25916EAB26F00C993CE /* LocationManager.m */; };
+		6613090B16FA704600CFCD74 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6613090A16FA704600CFCD74 /* NotificationViewController.m */; };
 		662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662975FE16EFE85000B460AC /* VenueDetailViewController.m */; };
 		6629765216F0CD5000B460AC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629765116F0CD5000B460AC /* Storage.m */; };
 		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
@@ -58,6 +59,8 @@
 		3B1A7B79C9EA4BE58A1FA3FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		6612E25816EAB26F00C993CE /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		6612E25916EAB26F00C993CE /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		6613090916FA704600CFCD74 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		6613090A16FA704600CFCD74 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		662975FD16EFE85000B460AC /* VenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailViewController.h; sourceTree = "<group>"; };
 		662975FE16EFE85000B460AC /* VenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailViewController.m; sourceTree = "<group>"; };
 		6629765016F0CD5000B460AC /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				6685547316E93B0800789F8E /* ExploreViewController.m */,
 				662975FD16EFE85000B460AC /* VenueDetailViewController.h */,
 				662975FE16EFE85000B460AC /* VenueDetailViewController.m */,
+				6613090916FA704600CFCD74 /* NotificationViewController.h */,
+				6613090A16FA704600CFCD74 /* NotificationViewController.m */,
 				66E7939C16E81927009A9152 /* MapViewController.h */,
 				66E7939D16E81927009A9152 /* MapViewController.m */,
 				66E7939016E80CFD009A9152 /* LeftPanelController.h */,
@@ -419,6 +424,7 @@
 				6629765716F0D3C600B460AC /* Places.xcdatamodeld in Sources */,
 				6629766116F0DA7B00B460AC /* VenueDetailView.m in Sources */,
 				6629767216F3AFA800B460AC /* List.m in Sources */,
+				6613090B16FA704600CFCD74 /* NotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
