@@ -38,6 +38,7 @@
 
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = mapRect;
+    self.mapViewController.mapView.frame = mapRect;
     self.mapViewController.mapView.delegate = self;
 
     self.tableView = [[UITableView alloc] initWithFrame:tableRect];
@@ -61,6 +62,7 @@
     self.hideTableButton.hidden = YES;
     [UIView animateWithDuration:0.2 animations:^{
         self.mapViewController.view.frame = self.view.frame;
+        self.mapViewController.mapView.frame = self.view.frame;
     }];
     [UIView animateWithDuration:0.3 animations: ^{
         self.tableView.frame = CGRectOffset(self.tableView.frame, 0, 400);
@@ -74,8 +76,8 @@
         self.tableView.frame = self.originalTableRect;
         self.showTableButton.hidden = NO;
     }];
-    [UIView animateWithDuration:0.3 animations: ^{
-        self.mapViewController.view.frame = self.originalMapRect;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.mapViewController.mapView.frame = self.originalMapRect;
     }];
 }
 
@@ -89,6 +91,7 @@
     };
 
     [ApiConnection fetchVenuesFromLocation:location completionHandler:completionBlock];
+    [self.mapViewController focusCurrentLocationWithDistance:500];
 }
 
 - (void)plotPlaces {
