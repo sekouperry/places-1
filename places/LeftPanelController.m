@@ -66,7 +66,10 @@
 
 - (void)newList {
     List *newList = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:[[Storage sharedStorage] managedObjectContext]];
-    newList.name = @"New list";
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MMM-yy"];
+    newList.name = [NSString stringWithFormat:@"%@ %@", @"List", [formatter stringFromDate:date]];
     NSError *error;
     [[[Storage sharedStorage] managedObjectContext] save:&error];
     [self.tableView reloadData];
