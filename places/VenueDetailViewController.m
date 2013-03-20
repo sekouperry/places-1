@@ -6,6 +6,8 @@
 #import "Storage.h"
 
 static const NSString *kPhotoSize = @"width500";
+static NSString * const kAddToList = @"Add to list.";
+static NSString * const kRemoveFromList = @"Remove from list.";
 
 @implementation VenueDetailViewController
 
@@ -27,11 +29,15 @@ static const NSString *kPhotoSize = @"width500";
     [self.view addSubview:_detailView];
 }
 
+- (void)viewDidUnload {
+    NSError *error;
+    [[[Storage sharedStorage] managedObjectContext] save:&error];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([self alreadySaved]) {
-        _detailView.addToListButton.titleLabel.text = @"Remove from list";
-        _detailView.addToListButton.enabled = NO;
+        [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
     }
 
     void (^completionBlock)(NSDictionary *) = ^(NSDictionary *photo){
@@ -65,12 +71,19 @@ static const NSString *kPhotoSize = @"width500";
 }
 
 - (void)addToList {
-    [[[Storage sharedStorage] managedObjectContext] insertObject:self.venue];
+    if (![self.venue isInserted]) {
+        [[[Storage sharedStorage] managedObjectContext] insertObject:self.venue];
+    }
     NSMutableSet *venues = [self.currentList mutableSetValueForKey:@"venues"];
     [venues addObject:self.venue];
-    NSError *error;
-    [[[Storage sharedStorage] managedObjectContext] save:&error];
-    _detailView.addToListButton.enabled = NO;
+    [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
+    [_detailView.addToListButton addTarget:self action:@selector(removeFromList) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)removeFromList {
+    [[self.currentList mutableSetValueForKey:@"venues"] removeObject:self.venue];
+    [_detailView.addToListButton setTitle:kAddToList forState:UIControlStateNormal];
+    [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (BOOL)alreadySaved {

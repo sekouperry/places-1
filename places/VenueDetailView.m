@@ -18,7 +18,7 @@ const NSInteger kEdgeInset = 10;
 
         _addToListButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         _addToListButton.frame = CGRectMake(CGRectGetMinX(_nameLabel.frame), CGRectGetMaxY(_nameLabel.frame) + kEdgeInset, 150, 30);
-        [_addToListButton setTitle:@"Add to list!" forState:UIControlStateNormal];
+        [_addToListButton setTitle:@"Add to list." forState:UIControlStateNormal];
 
         _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_addToListButton.frame) + kEdgeInset, CGRectGetWidth(_nameLabel.frame), 100)];
 
