@@ -28,7 +28,7 @@
     self.originalTableRect = tableRect;
 
     self.hideTableButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.hideTableButton addTarget:self action:@selector(hideTable) forControlEvents:UIControlEventTouchDown];
+    [self.hideTableButton addTarget:self action:@selector(hideTable) forControlEvents:UIControlEventTouchUpInside];
     self.hideTableButton.frame = mapRect;
 
     self.showTableButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -45,14 +45,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    [self.mapViewController.view addSubview:self.hideTableButton];
+    [self.view addSubview:self.mapViewController.view];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.hideTableButton];
     [self.mapViewController.view addSubview:self.showTableButton];
+    [self.mapViewController.view addSubview:self.searchAreaButton];
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchVenues)];
     self.navigationItem.rightBarButtonItem = searchButton;
 
-    [self.view addSubview:self.mapViewController.view];
-    [self.view addSubview:self.tableView];
     [self.mapViewController focusCurrentLocationWithDistance:500];
 
     [self requestLocations];
@@ -60,6 +61,7 @@
 
 - (void)hideTable {
     self.hideTableButton.hidden = YES;
+    self.searchAreaButton.hidden = NO;
     [UIView animateWithDuration:0.2 animations:^{
         self.mapViewController.view.frame = self.view.frame;
         self.mapViewController.mapView.frame = self.view.frame;
@@ -72,6 +74,7 @@
 
 - (void)showTable {
     self.hideTableButton.hidden = NO;
+    self.searchAreaButton.hidden = YES;
     [UIView animateWithDuration:0.2 animations:^{
         self.tableView.frame = self.originalTableRect;
         self.showTableButton.hidden = NO;
