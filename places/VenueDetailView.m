@@ -20,6 +20,10 @@ const NSInteger kEdgeInset = 10;
         _addToListButton.frame = CGRectMake(CGRectGetMinX(_nameLabel.frame), CGRectGetMaxY(_nameLabel.frame) + kEdgeInset, 150, 30);
         [_addToListButton setTitle:@"Add to list." forState:UIControlStateNormal];
 
+        _getDirectionsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _getDirectionsButton.frame = CGRectMake(CGRectGetMaxX(_addToListButton.frame)+10, CGRectGetMinY(_addToListButton.frame), 140, 30);
+        [_getDirectionsButton setTitle:@"Get Directions" forState:UIControlStateNormal];
+
         _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_addToListButton.frame) + kEdgeInset, CGRectGetWidth(_nameLabel.frame), 100)];
 
         _openingHoursLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(_nameLabel.frame), 80)];
@@ -30,6 +34,7 @@ const NSInteger kEdgeInset = 10;
         [self addSubview:_addToListButton];
         [self addSubview:_imageView];
         [self addSubview:_nameLabel];
+        [self addSubview:_getDirectionsButton];
     }
     return self;
 }

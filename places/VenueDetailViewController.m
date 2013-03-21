@@ -25,6 +25,7 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     _detailView.nameLabel.text = [NSString stringWithFormat:@"%@\n %@", self.venue.name, self.venue.address];
     _detailView.mapView.delegate = self;
     [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
+    [_detailView.getDirectionsButton addTarget:self action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
     [self scopeMapToVenue];
     [self.view addSubview:_detailView];
 }
@@ -79,6 +80,13 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
     [_detailView.addToListButton addTarget:self action:@selector(removeFromList) forControlEvents:UIControlEventTouchUpInside];
     [self displayNotificationWithMessage:[NSString stringWithFormat:@"Saved to %@!", self.currentList.name]];
+}
+
+- (void)getDirections {
+    MKPlacemark *place = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([self.venue.lat floatValue], [self.venue.lng floatValue]) addressDictionary:nil];
+    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:place];
+    item.name = self.venue.name;
+    [MKMapItem openMapsWithItems:@[item] launchOptions:nil];
 }
 
 - (void)removeFromList {
