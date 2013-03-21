@@ -91,7 +91,6 @@
 }
 
 - (void)searchArea {
-    NSLog(@"%d", [[self places] count]);
     void (^completionBlock)(NSArray *) = ^(NSArray *array){
         self.places = [array mutableCopy];
         [self plotPlaces];
