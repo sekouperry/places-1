@@ -24,7 +24,14 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     _detailView.nameLabel.numberOfLines = 2;
     _detailView.nameLabel.text = [NSString stringWithFormat:@"%@\n %@", self.venue.name, self.venue.address];
     _detailView.mapView.delegate = self;
-    [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([self alreadySaved]) {
+        [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
+        [_detailView.addToListButton addTarget:self action:@selector(removeFromList) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [_detailView.addToListButton setTitle:kAddToList forState:UIControlStateNormal];
+        [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
+    }
     [_detailView.getDirectionsButton addTarget:self action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
     [self scopeMapToVenue];
     [self.view addSubview:_detailView];
@@ -37,9 +44,6 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([self alreadySaved]) {
-        [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
-    }
 
     void (^completionBlock)(NSDictionary *) = ^(NSDictionary *photo){
         self.venuePhotoDetails = photo;

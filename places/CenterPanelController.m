@@ -20,6 +20,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.mapShowing = YES;
+    [self plotPlaces];
 }
 
 - (void)viewDidLoad {
