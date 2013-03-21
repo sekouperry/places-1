@@ -117,7 +117,6 @@
     SearchViewController *searchView = [[SearchViewController alloc] init];
     searchView.currentList = searchView.currentList;
     searchView.view.frame = self.view.frame;
-    searchView.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:searchView animated:YES];
 }
 

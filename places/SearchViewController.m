@@ -25,7 +25,6 @@ const NSInteger kSearchBarHeight = 44;
     [self.hideKeyboardButton addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchDown];
 
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.hideKeyboardButton];
     [self.view addSubview:self.searchBar];
 }
 
@@ -63,8 +62,12 @@ const NSInteger kSearchBarHeight = 44;
 
 #pragma mark UISearchBarDelegate
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [self.view addSubview:self.hideKeyboardButton];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder];
+    [self hideKeyboard];
 
    void(^completionBlock)(NSArray *) = ^(NSArray *array){
        self.places = array;
@@ -78,6 +81,7 @@ const NSInteger kSearchBarHeight = 44;
 }
 
 - (void)hideKeyboard {
+    [self.hideKeyboardButton removeFromSuperview];
     [self.searchBar resignFirstResponder];
 }
 
