@@ -1,6 +1,7 @@
 #import "ListViewController.h"
 #import "Storage.h"
 #import "Venue.h"
+#import "VenueDetailViewController.h"
 
 @interface ListViewController ()
 
@@ -71,6 +72,13 @@
         NSError *error;
         [[[Storage sharedStorage] managedObjectContext] save:&error];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    VenueDetailViewController *detailView = [[VenueDetailViewController alloc] initWithVenue:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    detailView.title = [[self.fetchedResultsController objectAtIndexPath:indexPath] name];
+    detailView.currentList = self.currentList;
+    [self.navigationController pushViewController:detailView animated:YES];
 }
 
 #pragma mark NSFetchResultsController Delegate
