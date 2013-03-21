@@ -77,5 +77,4 @@ const NSInteger kToolBarHeight = 44;
     [self.searchBar resignFirstResponder];
 }
 
-
 @end
