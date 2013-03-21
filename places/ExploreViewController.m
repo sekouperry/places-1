@@ -138,8 +138,16 @@
     if (annotationView == nil) {
         annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [[(MapAnnotation *)annotation venue] iconUrl], @"64.png"]];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        annotationView.imageView.image = [UIImage imageWithData:imageData];
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            __block NSData *imageData;
+            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                imageData = [NSData dataWithContentsOfURL:imageURL];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    annotationView.imageView.image = [UIImage imageWithData:imageData];
+                });
+            });
+        });
         annotationView.canShowCallout = YES;
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
