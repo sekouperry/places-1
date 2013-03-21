@@ -118,7 +118,7 @@
     searchView.currentList = searchView.currentList;
     searchView.view.frame = self.view.frame;
     searchView.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController presentModalViewController:searchView animated:YES];
+    [self.navigationController pushViewController:searchView animated:YES];
 }
 
 - (void)showDetailViewControllerWithVenue:(Venue *)venue {
