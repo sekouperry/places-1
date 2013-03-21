@@ -8,35 +8,25 @@
 
 @end
 
-const NSInteger kToolBarHeight = 44;
+const NSInteger kSearchBarHeight = 44;
 @implementation SearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIToolbar *toolbar = [[UIToolbar alloc] init];
-    toolbar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kToolBarHeight);
 
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    toolbar.items = @[cancelButton];
-
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, kToolBarHeight, CGRectGetWidth(self.view.frame), kToolBarHeight)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kSearchBarHeight)];
     self.searchBar.delegate = self;
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kToolBarHeight*2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kSearchBarHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    self.hideKeyboardButton = [[UIButton alloc] initWithFrame:CGRectMake(0, kToolBarHeight, CGRectGetWidth(self.view.frame), 200)];
+    self.hideKeyboardButton = [[UIButton alloc] initWithFrame:CGRectMake(0, kSearchBarHeight, CGRectGetWidth(self.view.frame), 200)];
     [self.hideKeyboardButton addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchDown];
 
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.hideKeyboardButton];
     [self.view addSubview:self.searchBar];
-    [self.view addSubview:toolbar];
-}
-
-- (void)cancel {
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark UITableViewDelegate
