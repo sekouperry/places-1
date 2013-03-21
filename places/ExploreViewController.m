@@ -114,10 +114,11 @@
 }
 
 - (void)searchVenues {
-    SearchViewController *exploreView = [[SearchViewController alloc] init];
-    exploreView.view.frame = self.view.frame;
-    exploreView.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController presentModalViewController:exploreView animated:YES];
+    SearchViewController *searchView = [[SearchViewController alloc] init];
+    searchView.currentList = searchView.currentList;
+    searchView.view.frame = self.view.frame;
+    searchView.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController presentModalViewController:searchView animated:YES];
 }
 
 - (void)showDetailViewControllerWithVenue:(Venue *)venue {

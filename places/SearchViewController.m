@@ -2,6 +2,7 @@
 #import "ApiConnection.h"
 #import "Venue.h"
 #import "SearchViewController.h"
+#import "VenueDetailViewController.h"
 
 @interface SearchViewController ()
 
@@ -57,6 +58,17 @@ const NSInteger kToolBarHeight = 44;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.places count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self showDetailViewControllerWithVenue:[self.places objectAtIndex:indexPath.row]];
+}
+
+- (void)showDetailViewControllerWithVenue:(Venue *)venue {
+    VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] initWithVenue:venue];
+    detailViewController.currentList = self.currentList;
+    detailViewController.title = venue.name;
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 #pragma mark UISearchBarDelegate
