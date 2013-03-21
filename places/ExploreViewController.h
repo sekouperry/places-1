@@ -10,6 +10,7 @@
 
 @property (strong, nonatomic) UIButton *hideTableButton;
 @property (strong, nonatomic) UIButton *showTableButton;
+@property (strong, nonatomic) UIButton *searchAreaButton;
 
 @property (nonatomic) CGRect originalMapRect;
 @property (nonatomic) CGRect originalTableRect;

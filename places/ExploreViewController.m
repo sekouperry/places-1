@@ -36,6 +36,12 @@
     self.showTableButton.frame = CGRectMake(20, 350, 30, 30);
     self.showTableButton.hidden = YES;
 
+    self.searchAreaButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.searchAreaButton addTarget:self action:@selector(searchArea) forControlEvents:UIControlEventTouchUpInside];
+    self.searchAreaButton.frame = CGRectMake(30, CGRectGetHeight(self.view.frame) - 100, 200, 40);
+    self.searchAreaButton.titleLabel.text = @"Search this area";
+    self.searchAreaButton.hidden = YES;
+
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = mapRect;
     self.mapViewController.mapView.frame = mapRect;
@@ -84,6 +90,19 @@
     }];
 }
 
+- (void)searchArea {
+    NSLog(@"%d", [[self places] count]);
+    void (^completionBlock)(NSArray *) = ^(NSArray *array){
+        self.places = [array mutableCopy];
+        [self plotPlaces];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        });
+    };
+
+    [ApiConnection fetchVenuesFromLocation:[self.mapViewController.mapView centerCoordinate] completionHandler:completionBlock];
+}
+
 - (void)requestLocations {
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
 
@@ -100,6 +119,7 @@
 }
 
 - (void)plotPlaces {
+    [self.mapViewController.mapView removeAnnotations:self.mapViewController.mapView.annotations];
     for (Venue *venue in self.places) {
         CLLocationCoordinate2D location;
         location.latitude = [venue.lat floatValue];
