@@ -87,7 +87,9 @@
     void (^completionBlock)(NSArray *) = ^(NSArray *array){
         self.places = [array mutableCopy];
         [self plotPlaces];
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        });
     };
 
     [ApiConnection fetchVenuesFromLocation:location completionHandler:completionBlock];

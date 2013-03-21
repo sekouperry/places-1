@@ -66,7 +66,9 @@ const NSInteger kToolBarHeight = 44;
 
    void(^completionBlock)(NSArray *) = ^(NSArray *array){
        self.places = array;
-       [self.tableView reloadData];
+       dispatch_async(dispatch_get_main_queue(), ^{
+           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+       });
    };
 
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
