@@ -127,14 +127,6 @@
 
 #pragma MapView Delegate
 
-- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView {
-    NSLog(@"location user");
-}
-
-- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView {
-    NSLog(@"stopped locating user");
-}
-
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
