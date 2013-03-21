@@ -78,26 +78,25 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     [venues addObject:self.venue];
     [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
     [_detailView.addToListButton addTarget:self action:@selector(removeFromList) forControlEvents:UIControlEventTouchUpInside];
-    [self displayNotificationWithMessage:@"Saved to list X !"];
+    [self displayNotificationWithMessage:[NSString stringWithFormat:@"Saved to %@!", self.currentList.name]];
 }
 
 - (void)removeFromList {
     [[self.currentList mutableSetValueForKey:@"venues"] removeObject:self.venue];
     [_detailView.addToListButton setTitle:kAddToList forState:UIControlStateNormal];
     [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
-    [self displayNotificationWithMessage:@"Removed from list X !"];
+    [self displayNotificationWithMessage:[NSString stringWithFormat:@"Removed from %@", self.currentList.name]];
 }
 
 - (void)displayNotificationWithMessage:(NSString *)message {
     self.view.userInteractionEnabled = NO;
-    self.notification.message = message;
     self.notification.textLabel.text = message;
     self.notification.view.alpha = 0;
     [self.view addSubview:self.notification.view];
     [UIView animateWithDuration:0.2 animations:^{
         self.notification.view.alpha = 0.8;
     }];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.3 animations:^{
             self.notification.view.alpha = 0.0;
         } completion:^(BOOL finished) {
@@ -143,4 +142,5 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     }
     return _notification;
 }
+
 @end

@@ -2,7 +2,7 @@
 
 @interface NotificationViewController : UIViewController
 
-@property (strong, nonatomic) NSString *message;
 @property (strong, nonatomic) UILabel *textLabel;
+@property (strong, nonatomic) UIImageView *imageView;
 
 @end
