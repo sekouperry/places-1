@@ -21,6 +21,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.mapShowing = YES;
     [self plotPlaces];
+    [self.mapViewController focusCurrentLocationWithDistance:500.0];
 }
 
 - (void)viewDidLoad {
@@ -43,9 +44,6 @@
     self.centerMapButton.frame = CGRectMake(20, 330, 40, 40);
     [self.centerMapButton addTarget:self action:@selector(centerMap) forControlEvents:UIControlEventTouchUpInside];
     [self.mapViewController.view addSubview:self.centerMapButton];
-
-    [self.mapViewController focusCurrentLocationWithDistance:500.0];
-    self.mapShowing = YES;
 
     [self getPreviousList];
 }
