@@ -137,7 +137,7 @@
 
 - (void)searchVenues {
     SearchViewController *searchView = [[SearchViewController alloc] init];
-    searchView.currentList = searchView.currentList;
+    searchView.currentList = self.currentList;
     searchView.view.frame = self.view.frame;
     [self.navigationController pushViewController:searchView animated:YES];
 }
