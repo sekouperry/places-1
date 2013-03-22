@@ -60,7 +60,8 @@
 }
 
 - (void)plotPlaces {
-    NSArray *currentAnnotations = [self.mapViewController.mapView annotations];
+    NSMutableArray *currentAnnotations = [[self.mapViewController.mapView annotations] mutableCopy];
+    [currentAnnotations removeObject:self.mapViewController.mapView.userLocation];
     [self.mapViewController.mapView removeAnnotations:currentAnnotations];
     for (Venue *venue in self.currentList.venues) {
         CLLocationCoordinate2D location;
