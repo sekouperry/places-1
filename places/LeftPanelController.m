@@ -29,20 +29,14 @@
 - (id)init {
     self = [super init];
     self.view.frame = CGRectMake(0, 0, 360, 480);
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor colorWithRed:46/255.0 green:50/255.0 blue:60/255.0 alpha:1.0];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 255, 480)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(5, 5, 150, 40);
-    [button setTitle:@"Create new list" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(newList) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:button];
-
     [self.view addSubview:self.tableView];
-    self.tableView.tableHeaderView = headerView;
 
     return self;
 }
@@ -162,6 +156,12 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     List *list = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = list.name;
+    cell.textLabel.textColor = [UIColor whiteColor];
+
+    UIImage *background = [UIImage imageNamed:@"leftPanelCellBg"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.frame];
+    imageView.image = background;
+    cell.backgroundView = imageView;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -196,6 +196,38 @@
     [defaults synchronize];
     [self.sidePanelController showCenterPanelAnimated:YES];
     [self.delegate setActiveList:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
+    UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    sectionHeader.backgroundColor = [UIColor clearColor];
+
+    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetHeight(sectionHeader.frame)/2 - 10, CGRectGetWidth(tableView.frame), 20)];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont boldSystemFontOfSize:18];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = sectionTitle;
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(CGRectGetWidth(label.frame)-35, 5, 20, 20);
+    [button setBackgroundImage:[UIImage imageNamed:@"addList"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"addListPressed"] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(newList) forControlEvents:UIControlEventTouchUpInside];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:sectionHeader.frame];
+    UIImage *image = [UIImage imageNamed:@"LeftCellHeader"];
+    imageView.image = image;
+    [sectionHeader addSubview:imageView];
+    [sectionHeader addSubview:label];
+    [sectionHeader addSubview:button];
+
+    return sectionHeader;
 }
 
 @end

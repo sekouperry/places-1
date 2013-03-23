@@ -11,6 +11,11 @@
 		6612E25A16EAB26F00C993CE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6612E25916EAB26F00C993CE /* LocationManager.m */; };
 		6613090B16FA704600CFCD74 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6613090A16FA704600CFCD74 /* NotificationViewController.m */; };
 		6623DCAC16FB504900687175 /* tickIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCAB16FB504900687175 /* tickIcon@2x.png */; };
+		6623DCB616FCFB3D00687175 /* leftPanelCellBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCB516FCFB3D00687175 /* leftPanelCellBg.png */; };
+		6623DCD916FE485900687175 /* LeftCellHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCD716FE485900687175 /* LeftCellHeader.png */; };
+		6623DCDA16FE485900687175 /* LeftCellHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCD816FE485900687175 /* LeftCellHeader@2x.png */; };
+		6623DCE016FE508400687175 /* addList.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCDF16FE508400687175 /* addList.png */; };
+		6623DCEF16FE514500687175 /* addListPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCEE16FE514500687175 /* addListPressed.png */; };
 		662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662975FE16EFE85000B460AC /* VenueDetailViewController.m */; };
 		6629765216F0CD5000B460AC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629765116F0CD5000B460AC /* Storage.m */; };
 		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
@@ -19,7 +24,6 @@
 		6629767216F3AFA800B460AC /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629767116F3AFA700B460AC /* List.m */; };
 		6635BC4516EE453C007FB4C0 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4416EE453C007FB4C0 /* MapAnnotation.m */; };
 		6635BC4816EE45DD007FB4C0 /* MapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */; };
-		6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6635BC4B16EE6488007FB4C0 /* tempImage.png */; };
 		6685547416E93B0800789F8E /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547316E93B0800789F8E /* ExploreViewController.m */; };
 		6685547716E969D900789F8E /* ApiConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547616E969D900789F8E /* ApiConnection.m */; };
 		6685547A16EA4C2300789F8E /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6685547916EA4C2300789F8E /* Venue.m */; };
@@ -63,6 +67,11 @@
 		6613090916FA704600CFCD74 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		6613090A16FA704600CFCD74 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		6623DCAB16FB504900687175 /* tickIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tickIcon@2x.png"; sourceTree = "<group>"; };
+		6623DCB516FCFB3D00687175 /* leftPanelCellBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftPanelCellBg.png; sourceTree = "<group>"; };
+		6623DCD716FE485900687175 /* LeftCellHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LeftCellHeader.png; sourceTree = "<group>"; };
+		6623DCD816FE485900687175 /* LeftCellHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LeftCellHeader@2x.png"; sourceTree = "<group>"; };
+		6623DCDF16FE508400687175 /* addList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addList.png; sourceTree = "<group>"; };
+		6623DCEE16FE514500687175 /* addListPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addListPressed.png; sourceTree = "<group>"; };
 		662975FD16EFE85000B460AC /* VenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailViewController.h; sourceTree = "<group>"; };
 		662975FE16EFE85000B460AC /* VenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailViewController.m; sourceTree = "<group>"; };
 		6629765016F0CD5000B460AC /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
@@ -77,7 +86,6 @@
 		6635BC4416EE453C007FB4C0 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationView.h; sourceTree = "<group>"; };
 		6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationView.m; sourceTree = "<group>"; };
-		6635BC4B16EE6488007FB4C0 /* tempImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tempImage.png; sourceTree = "<group>"; };
 		6685547216E93B0800789F8E /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
 		6685547316E93B0800789F8E /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		6685547516E969D900789F8E /* ApiConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiConnection.h; sourceTree = "<group>"; };
@@ -146,6 +154,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6623DCB016FCF5AF00687175 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6623DCEE16FE514500687175 /* addListPressed.png */,
+				6623DCDF16FE508400687175 /* addList.png */,
+				6623DCD716FE485900687175 /* LeftCellHeader.png */,
+				6623DCD816FE485900687175 /* LeftCellHeader@2x.png */,
+				6623DCB516FCFB3D00687175 /* leftPanelCellBg.png */,
+				6623DCAB16FB504900687175 /* tickIcon@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		6629765D16F0D9A900B460AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +265,7 @@
 				6612E25916EAB26F00C993CE /* LocationManager.m */,
 				6685547516E969D900789F8E /* ApiConnection.h */,
 				6685547616E969D900789F8E /* ApiConnection.m */,
+				6623DCB016FCF5AF00687175 /* Resources */,
 				66E7935C16E80512009A9152 /* Supporting Files */,
 			);
 			path = places;
@@ -252,8 +274,6 @@
 		66E7935C16E80512009A9152 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6623DCAB16FB504900687175 /* tickIcon@2x.png */,
-				6635BC4B16EE6488007FB4C0 /* tempImage.png */,
 				66E7935D16E80512009A9152 /* places-Info.plist */,
 				66E7935E16E80512009A9152 /* InfoPlist.strings */,
 				66E7936116E80512009A9152 /* main.m */,
@@ -360,8 +380,12 @@
 				66E7936816E80512009A9152 /* Default.png in Resources */,
 				66E7936A16E80512009A9152 /* Default@2x.png in Resources */,
 				66E7936C16E80512009A9152 /* Default-568h@2x.png in Resources */,
-				6635BC4C16EE6488007FB4C0 /* tempImage.png in Resources */,
 				6623DCAC16FB504900687175 /* tickIcon@2x.png in Resources */,
+				6623DCB616FCFB3D00687175 /* leftPanelCellBg.png in Resources */,
+				6623DCD916FE485900687175 /* LeftCellHeader.png in Resources */,
+				6623DCDA16FE485900687175 /* LeftCellHeader@2x.png in Resources */,
+				6623DCE016FE508400687175 /* addList.png in Resources */,
+				6623DCEF16FE514500687175 /* addListPressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
