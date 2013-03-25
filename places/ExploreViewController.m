@@ -57,8 +57,12 @@
     [self.mapViewController.view addSubview:self.showTableButton];
     [self.mapViewController.view addSubview:self.searchAreaButton];
 
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchVenues)];
-    self.navigationItem.rightBarButtonItem = searchButton;
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setBackgroundImage:[UIImage imageNamed:@"searchButton"] forState:UIControlStateNormal];
+    searchButton.frame = CGRectMake(0, 0, 37, 30);
+    [searchButton addTarget:self action:@selector(searchVenues) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    self.navigationItem.rightBarButtonItem = searchBarItem;
 
     [self.mapViewController focusCurrentLocationWithDistance:500];
 

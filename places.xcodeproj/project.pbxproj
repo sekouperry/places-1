@@ -22,6 +22,8 @@
 		6623DCF71700BB2700687175 /* listView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCF61700BB2700687175 /* listView@2x.png */; };
 		6623DCFB1700D9EB00687175 /* panelDisplay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCFA1700D9EB00687175 /* panelDisplay@2x.png */; };
 		6623DD011700DEE800687175 /* addLocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD001700DEE800687175 /* addLocation@2x.png */; };
+		6623DD031700E04D00687175 /* navigationButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD021700E04D00687175 /* navigationButton@2x.png */; };
+		6623DD071700E74A00687175 /* searchButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD061700E74A00687175 /* searchButton@2x.png */; };
 		662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662975FE16EFE85000B460AC /* VenueDetailViewController.m */; };
 		6629765216F0CD5000B460AC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629765116F0CD5000B460AC /* Storage.m */; };
 		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
@@ -84,6 +86,8 @@
 		6623DCF61700BB2700687175 /* listView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "listView@2x.png"; sourceTree = "<group>"; };
 		6623DCFA1700D9EB00687175 /* panelDisplay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "panelDisplay@2x.png"; sourceTree = "<group>"; };
 		6623DD001700DEE800687175 /* addLocation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addLocation@2x.png"; sourceTree = "<group>"; };
+		6623DD021700E04D00687175 /* navigationButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationButton@2x.png"; sourceTree = "<group>"; };
+		6623DD061700E74A00687175 /* searchButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchButton@2x.png"; sourceTree = "<group>"; };
 		662975FD16EFE85000B460AC /* VenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailViewController.h; sourceTree = "<group>"; };
 		662975FE16EFE85000B460AC /* VenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailViewController.m; sourceTree = "<group>"; };
 		6629765016F0CD5000B460AC /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		6623DCB016FCF5AF00687175 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6623DD061700E74A00687175 /* searchButton@2x.png */,
+				6623DD021700E04D00687175 /* navigationButton@2x.png */,
 				6623DD001700DEE800687175 /* addLocation@2x.png */,
 				6623DCFA1700D9EB00687175 /* panelDisplay@2x.png */,
 				6623DCF61700BB2700687175 /* listView@2x.png */,
@@ -410,6 +416,8 @@
 				6623DCF71700BB2700687175 /* listView@2x.png in Resources */,
 				6623DCFB1700D9EB00687175 /* panelDisplay@2x.png in Resources */,
 				6623DD011700DEE800687175 /* addLocation@2x.png in Resources */,
+				6623DD031700E04D00687175 /* navigationButton@2x.png in Resources */,
+				6623DD071700E74A00687175 /* searchButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
