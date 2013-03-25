@@ -80,8 +80,9 @@
 
             self.editingCellTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 200, 30)];
             self.editingCellTextField.delegate = self;
-            self.editingCellTextField.backgroundColor = [UIColor whiteColor];
+            self.editingCellTextField.backgroundColor = [UIColor colorWithRed:46/255.0 green:50/255.0 blue:60/255.0 alpha:1.0];
             self.editingCellTextField.font = [UIFont boldSystemFontOfSize:20];
+            self.editingCellTextField.textColor = [UIColor whiteColor];
             self.editingCellTextField.text = cell.textLabel.text;
             [cell addSubview:self.editingCellTextField];
             [self.editingCellTextField becomeFirstResponder];
