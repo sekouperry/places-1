@@ -62,7 +62,7 @@
     [self.view addSubview:self.mapViewController.view];
 
     self.centerMapButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.centerMapButton.frame = CGRectMake(20, CGRectGetMaxY(self.mapViewController.view.frame) - 120, 30, 30);
+    self.centerMapButton.frame = CGRectMake(20, CGRectGetMaxY(self.mapViewController.view.frame) - 120, 36, 36);
     [self.centerMapButton setBackgroundImage:[UIImage imageNamed:@"focusUser"] forState:UIControlStateNormal];
     [self.centerMapButton addTarget:self action:@selector(centerMap) forControlEvents:UIControlEventTouchUpInside];
     [self.mapViewController.view addSubview:self.centerMapButton];
