@@ -6,6 +6,7 @@
 #import "Venue.h"
 #import "VenueDetailViewController.h"
 #import "Storage.h"
+#import "AppDelegate.h"
 
 @interface CenterPanelController ()
 
@@ -29,11 +30,31 @@
 
     self.view.frame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem *toggleMapButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(toggleMap:)];
-    UIBarButtonItem *addLocationButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(exploreLocations)];
+
+    UIButton *toggleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    toggleButton.frame = CGRectMake(0, 0, 44, 30);
+    [toggleButton setBackgroundImage:[UIImage imageNamed:@"listView"] forState:UIControlStateNormal];
+    [toggleButton addTarget:self action:@selector(toggleMap:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    addButton.frame = CGRectMake(0, 0, 37, 30);
+    [addButton setBackgroundImage:[UIImage imageNamed:@"addLocation"] forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(exploreLocations) forControlEvents:UIControlEventTouchUpInside];
+
+    UIBarButtonItem *toggleMapButton = [[UIBarButtonItem alloc] initWithCustomView:toggleButton];
+    UIBarButtonItem *addLocationButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
     self.navigationItem.rightBarButtonItems = @[toggleMapButton, addLocationButton];
 
     [self addObserver:self forKeyPath:@"currentList" options:NSKeyValueObservingOptionNew context:nil];
+
+    UIButton *showPanelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    showPanelButton.frame = CGRectMake(0, 0, 44, 30);
+    [showPanelButton setBackgroundImage:[UIImage imageNamed:@"panelDisplay"] forState:UIControlStateNormal];
+    JASidePanelController *sidePanelController = [(AppDelegate *)[UIApplication sharedApplication].delegate viewController];
+    [showPanelButton addTarget:sidePanelController action:@selector(toggleLeftPanel:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:showPanelButton];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+
     self.listView = [[ListViewController alloc] init];
     self.mapViewController = [[MapViewController alloc] init];
     self.mapViewController.view.frame = [[UIScreen mainScreen] bounds];
@@ -45,6 +66,8 @@
     [self.centerMapButton setBackgroundImage:[UIImage imageNamed:@"focusUser"] forState:UIControlStateNormal];
     [self.centerMapButton addTarget:self action:@selector(centerMap) forControlEvents:UIControlEventTouchUpInside];
     [self.mapViewController.view addSubview:self.centerMapButton];
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBar"] forBarMetrics:UIBarMetricsDefault];
 
     [self getPreviousList];
 }
