@@ -182,7 +182,13 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *savedList = [[defaults URLForKey:kSelectedList] absoluteString];
         List *list = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        if ([[[[list objectID] URIRepresentation] absoluteString] isEqualToString:savedList]) {
+            [defaults setURL:nil forKey:kSelectedList];
+            [defaults synchronize];
+        }
         [[[Storage sharedStorage] managedObjectContext] deleteObject:list];
         NSError *error;
         [[[Storage sharedStorage] managedObjectContext] save:&error];
