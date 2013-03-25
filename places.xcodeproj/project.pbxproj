@@ -24,6 +24,10 @@
 		6623DD011700DEE800687175 /* addLocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD001700DEE800687175 /* addLocation@2x.png */; };
 		6623DD031700E04D00687175 /* navigationButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD021700E04D00687175 /* navigationButton@2x.png */; };
 		6623DD071700E74A00687175 /* searchButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD061700E74A00687175 /* searchButton@2x.png */; };
+		6623DD0E1700EDD000687175 /* displayTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD0C1700EDCE00687175 /* displayTable.png */; };
+		6623DD0F1700EDD000687175 /* displayTable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD0D1700EDCE00687175 /* displayTable@2x.png */; };
+		6623DD221700F66000687175 /* searchArea.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD201700F65E00687175 /* searchArea.png */; };
+		6623DD231700F66000687175 /* searchArea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DD211700F65E00687175 /* searchArea@2x.png */; };
 		662975FF16EFE85000B460AC /* VenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662975FE16EFE85000B460AC /* VenueDetailViewController.m */; };
 		6629765216F0CD5000B460AC /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6629765116F0CD5000B460AC /* Storage.m */; };
 		6629765416F0D2FF00B460AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6629765316F0D2FF00B460AC /* CoreData.framework */; };
@@ -88,6 +92,10 @@
 		6623DD001700DEE800687175 /* addLocation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addLocation@2x.png"; sourceTree = "<group>"; };
 		6623DD021700E04D00687175 /* navigationButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationButton@2x.png"; sourceTree = "<group>"; };
 		6623DD061700E74A00687175 /* searchButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchButton@2x.png"; sourceTree = "<group>"; };
+		6623DD0C1700EDCE00687175 /* displayTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = displayTable.png; sourceTree = "<group>"; };
+		6623DD0D1700EDCE00687175 /* displayTable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "displayTable@2x.png"; sourceTree = "<group>"; };
+		6623DD201700F65E00687175 /* searchArea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchArea.png; sourceTree = "<group>"; };
+		6623DD211700F65E00687175 /* searchArea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchArea@2x.png"; sourceTree = "<group>"; };
 		662975FD16EFE85000B460AC /* VenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailViewController.h; sourceTree = "<group>"; };
 		662975FE16EFE85000B460AC /* VenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailViewController.m; sourceTree = "<group>"; };
 		6629765016F0CD5000B460AC /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
@@ -173,6 +181,10 @@
 		6623DCB016FCF5AF00687175 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6623DD201700F65E00687175 /* searchArea.png */,
+				6623DD211700F65E00687175 /* searchArea@2x.png */,
+				6623DD0C1700EDCE00687175 /* displayTable.png */,
+				6623DD0D1700EDCE00687175 /* displayTable@2x.png */,
 				6623DD061700E74A00687175 /* searchButton@2x.png */,
 				6623DD021700E04D00687175 /* navigationButton@2x.png */,
 				6623DD001700DEE800687175 /* addLocation@2x.png */,
@@ -418,6 +430,10 @@
 				6623DD011700DEE800687175 /* addLocation@2x.png in Resources */,
 				6623DD031700E04D00687175 /* navigationButton@2x.png in Resources */,
 				6623DD071700E74A00687175 /* searchButton@2x.png in Resources */,
+				6623DD0E1700EDD000687175 /* displayTable.png in Resources */,
+				6623DD0F1700EDD000687175 /* displayTable@2x.png in Resources */,
+				6623DD221700F66000687175 /* searchArea.png in Resources */,
+				6623DD231700F66000687175 /* searchArea@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

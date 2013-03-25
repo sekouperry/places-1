@@ -31,15 +31,20 @@
     [self.hideTableButton addTarget:self action:@selector(hideTable) forControlEvents:UIControlEventTouchUpInside];
     self.hideTableButton.frame = mapRect;
 
-    self.showTableButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.showTableButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.showTableButton.frame = CGRectMake(20, 20, 36, 36);
+    [self.showTableButton setBackgroundImage:[UIImage imageNamed:@"displayTable"] forState:UIControlStateNormal];
     [self.showTableButton addTarget:self action:@selector(showTable) forControlEvents:UIControlEventTouchUpInside];
-    self.showTableButton.frame = CGRectMake(20, 350, 30, 30);
     self.showTableButton.hidden = YES;
 
-    self.searchAreaButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.searchAreaButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.searchAreaButton setBackgroundImage:[UIImage imageNamed:@"searchArea"] forState:UIControlStateNormal];
     [self.searchAreaButton addTarget:self action:@selector(searchArea) forControlEvents:UIControlEventTouchUpInside];
-    self.searchAreaButton.frame = CGRectMake(30, CGRectGetHeight(self.view.frame) - 100, 200, 40);
-    self.searchAreaButton.titleLabel.text = @"Search this area";
+    self.searchAreaButton.frame = CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - 100, CGRectGetHeight(self.view.frame) - 105, 200, 40);
+    [self.searchAreaButton setTitle:@"Search this area" forState:UIControlStateNormal];
+    [self.searchAreaButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.searchAreaButton.titleLabel setShadowColor:[UIColor blackColor]];
+    [self.searchAreaButton.titleLabel setShadowOffset:CGSizeMake(-1, 0)];
     self.searchAreaButton.hidden = YES;
 
     self.mapViewController = [[MapViewController alloc] init];
@@ -87,7 +92,7 @@
     self.searchAreaButton.hidden = YES;
     [UIView animateWithDuration:0.2 animations:^{
         self.tableView.frame = self.originalTableRect;
-        self.showTableButton.hidden = NO;
+        self.showTableButton.hidden = YES;
     }];
     [UIView animateWithDuration:0.3 animations:^{
         self.mapViewController.mapView.frame = self.originalMapRect;
