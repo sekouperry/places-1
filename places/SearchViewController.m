@@ -8,13 +8,14 @@
 
 @end
 
-const NSInteger kSearchBarHeight = 44;
+const NSInteger kSearchBarHeight = 40;
 @implementation SearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kSearchBarHeight)];
+    [self.searchBar setBarStyle:UIBarStyleBlack];
     self.searchBar.delegate = self;
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kSearchBarHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
