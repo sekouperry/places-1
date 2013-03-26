@@ -6,7 +6,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake((CGRectGetWidth(frame)/2) - 100, 100, 200, 20)];
-        self.messageLabel.text = @"Loading data...";
+        self.messageLabel.text = @"Finding places...";
         self.messageLabel.backgroundColor = [UIColor clearColor];
         self.messageLabel.font = [UIFont boldSystemFontOfSize:20];
         self.messageLabel.textColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0  alpha:1.0];
