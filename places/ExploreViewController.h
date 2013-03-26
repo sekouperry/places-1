@@ -1,10 +1,12 @@
 #import "MapViewController.h"
 #import "List.h"
+#import "LoadingPlaceholderView.h"
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
 @interface ExploreViewController : UIViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 
+@property (strong, nonatomic) LoadingPlaceholderView *loadingPlaceholder;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) MapViewController *mapViewController;
 

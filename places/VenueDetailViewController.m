@@ -20,7 +20,10 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 - (void)loadView {
     [super loadView];
     self.view.backgroundColor = [UIColor whiteColor];
+
     _detailView = [[VenueDetailView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.view = _detailView;
+
     _detailView.nameLabel.text = self.venue.name;
     if (self.venue.address) {
         _detailView.addressLabel.text = self.venue.address;
@@ -38,8 +41,6 @@ static NSString * const kRemoveFromList = @"Remove from list.";
         [_detailView.addToListButton setTitle:kAddToList forState:UIControlStateNormal];
         [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
     }
-    [self scopeMapToVenue];
-    [self.view addSubview:_detailView];
 }
 
 - (void)viewDidUnload {
@@ -61,6 +62,7 @@ static NSString * const kRemoveFromList = @"Remove from list.";
         [self displayHours];
     };
     [ApiConnection fetchDetailsFromVenue:self.venue.foursquareId compeltionHandler:openingHoursCompletionBlock];
+    [self scopeMapToVenue];
 }
 
 - (void)displayHours {
@@ -159,9 +161,14 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 
     if (annotationView == nil) {
         annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [[(MapAnnotation *)annotation venue] iconUrl], @"64.png"]];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        annotationView.imageView.image = [UIImage imageWithData:imageData];
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [[(MapAnnotation *)annotation venue] iconUrl], @"64.png"]];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                annotationView.imageView.image = [UIImage imageWithData:imageData];
+            });
+        });
         annotationView.canShowCallout = YES;
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }

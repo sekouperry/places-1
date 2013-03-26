@@ -7,6 +7,7 @@
 #import "MapAnnotationView.h"
 #import "VenueDetailViewController.h"
 
+
 @interface ExploreViewController ()
 
 @end
@@ -56,8 +57,10 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
+    self.loadingPlaceholder = [[LoadingPlaceholderView alloc] initWithFrame:self.originalTableRect];
+
     [self.view addSubview:self.mapViewController.view];
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.loadingPlaceholder];
     [self.view addSubview:self.hideTableButton];
     [self.mapViewController.view addSubview:self.showTableButton];
     [self.mapViewController.view addSubview:self.searchAreaButton];
@@ -107,7 +110,6 @@
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         });
     };
-
     [ApiConnection fetchVenuesFromLocation:[self.mapViewController.mapView centerCoordinate] completionHandler:completionBlock];
 }
 
@@ -116,9 +118,17 @@
 
     void (^completionBlock)(NSArray *) = ^(NSArray *array){
         self.places = [array mutableCopy];
+        if (!self.places) {
+            self.loadingPlaceholder.messageLabel.text = @"Error loading data";
+            self.loadingPlaceholder.shouldAnimate = NO;
+            return;
+        }
+
         [self plotPlaces];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            [self.loadingPlaceholder removeFromSuperview];
+            [self.view addSubview:self.tableView];
         });
     };
 
@@ -172,9 +182,9 @@
         annotationView = [[MapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [[(MapAnnotation *)annotation venue] iconUrl], @"64.png"]];
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             __block NSData *imageData;
-            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 imageData = [NSData dataWithContentsOfURL:imageURL];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     annotationView.imageView.image = [UIImage imageWithData:imageData];

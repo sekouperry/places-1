@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		32FA147EFD414CC1A3BE66F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F32D4231F0DD42369DAE14DD /* libPods.a */; };
+		6601990E1702204B008BDE67 /* LoadingPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6601990D1702204B008BDE67 /* LoadingPlaceholderView.m */; };
 		6612E25A16EAB26F00C993CE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6612E25916EAB26F00C993CE /* LocationManager.m */; };
 		6613090B16FA704600CFCD74 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6613090A16FA704600CFCD74 /* NotificationViewController.m */; };
 		6623DCAC16FB504900687175 /* tickIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6623DCAB16FB504900687175 /* tickIcon@2x.png */; };
@@ -78,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		3B1A7B79C9EA4BE58A1FA3FC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		6601990C1702204B008BDE67 /* LoadingPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingPlaceholderView.h; sourceTree = "<group>"; };
+		6601990D1702204B008BDE67 /* LoadingPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingPlaceholderView.m; sourceTree = "<group>"; };
 		6612E25816EAB26F00C993CE /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		6612E25916EAB26F00C993CE /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		6613090916FA704600CFCD74 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 		6629765D16F0D9A900B460AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6601990C1702204B008BDE67 /* LoadingPlaceholderView.h */,
+				6601990D1702204B008BDE67 /* LoadingPlaceholderView.m */,
 				6635BC4616EE45DD007FB4C0 /* MapAnnotationView.h */,
 				6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */,
 				6629765F16F0DA7B00B460AC /* VenueDetailView.h */,
@@ -517,6 +522,7 @@
 				6629766116F0DA7B00B460AC /* VenueDetailView.m in Sources */,
 				6629767216F3AFA800B460AC /* List.m in Sources */,
 				6613090B16FA704600CFCD74 /* NotificationViewController.m in Sources */,
+				6601990E1702204B008BDE67 /* LoadingPlaceholderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
