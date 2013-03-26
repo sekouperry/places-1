@@ -25,12 +25,17 @@ const NSInteger kEdgeInset = 10;
 
         _middleSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(self.frame), 105)];
         _middleSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];
-        _openingHoursLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, kEdgeInset, CGRectGetWidth(_middleSection.frame)-kEdgeInset, 20)];
-        _openingHoursLabel.text = @"Opening Hours:";
-        _openingHoursLabel.font = [UIFont boldSystemFontOfSize:16];
-        _openingHoursLabel.textColor = [UIColor darkGrayColor];
+        _openingHoursHeader = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, kEdgeInset, CGRectGetWidth(_middleSection.frame)-kEdgeInset, 20)];
+        _openingHoursHeader.text = @"Opening Hours:";
+        _openingHoursHeader.font = [UIFont boldSystemFontOfSize:16];
+        _openingHoursHeader.textColor = [UIColor darkGrayColor];
+        _openingHoursHeader.backgroundColor = [UIColor clearColor];
+        _openingHoursLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_openingHoursHeader.frame), CGRectGetWidth(_middleSection.frame)-kEdgeInset, 60)];
+        _openingHoursLabel.textColor = [UIColor lightGrayColor];
+        _openingHoursLabel.font = [UIFont boldSystemFontOfSize:14];
         _openingHoursLabel.backgroundColor = [UIColor clearColor];
         [_middleSection addSubview:_openingHoursLabel];
+        [_middleSection addSubview:_openingHoursHeader];
 
         _bottomSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_middleSection.frame), CGRectGetWidth(self.frame), 60)];
         _bottomSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];

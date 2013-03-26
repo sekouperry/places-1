@@ -50,12 +50,25 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    void (^completionBlock)(NSDictionary *) = ^(NSDictionary *photo){
+    void (^photoCompletionBlock)(NSDictionary *) = ^(NSDictionary *photo){
         self.venuePhotoDetails = photo;
         [self displayImage];
-        
     };
-    [ApiConnection fetchPhotosFromVenue:self.venue.foursquareId completionHandler:completionBlock];
+
+    [ApiConnection fetchPhotosFromVenue:self.venue.foursquareId completionHandler:photoCompletionBlock];
+    void (^openingHoursCompletionBlock)(NSDictionary *) = ^(NSDictionary *hours) {
+        self.venueOpeningHours = hours;
+        [self displayHours];
+    };
+    [ApiConnection fetchDetailsFromVenue:self.venue.foursquareId compeltionHandler:openingHoursCompletionBlock];
+}
+
+- (void)displayHours {
+    if (self.venueOpeningHours) {
+        _detailView.openingHoursLabel.text = @"I HAVE OPENING HOURS";
+    } else {
+        _detailView.openingHoursLabel.text = @"Opening hours not available.";
+    }
 }
 
 - (void)displayImage {

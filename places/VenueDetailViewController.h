@@ -9,6 +9,7 @@
 @property (strong, nonatomic) Venue *venue;
 @property (strong, nonatomic) VenueDetailView *detailView;
 @property (strong, nonatomic) NSDictionary *venuePhotoDetails;
+@property (strong, nonatomic) NSDictionary *venueOpeningHours;
 @property (strong, nonatomic) List *currentList;
 @property (strong, nonatomic) NotificationViewController *notification;
 

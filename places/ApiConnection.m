@@ -66,6 +66,22 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     [self fetchVenueswithLocation:location Query:@"" andCompletionHandler:completion];
 }
 
++ (void)fetchDetailsFromVenue:(NSString *)venueId compeltionHandler:(void (^)())completion {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+
+        NSDictionary *responseDictionary = [jsonResponse objectForKey:@"response"];
+        NSDictionary *venueDictionary = [responseDictionary objectForKey:@"venue"];
+        NSDictionary *hoursDictionary = [venueDictionary objectForKey:@"hours"];
+        completion(hoursDictionary);
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    }];
+}
+
 + (void)fetchPhotosFromVenue:(NSString *)venueId completionHandler:(void (^)())completion {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];

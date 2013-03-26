@@ -10,6 +10,7 @@
 @property (strong, nonatomic) UIButton *addToListButton;
 
 @property (strong, nonatomic) MKMapView *mapView;
+@property (strong, nonatomic) UILabel *openingHoursHeader;
 @property (strong, nonatomic) UILabel *openingHoursLabel;
 
 @property (strong, nonatomic) UIView *middleSection;
