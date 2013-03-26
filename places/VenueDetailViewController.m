@@ -21,18 +21,23 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     [super loadView];
     self.view.backgroundColor = [UIColor whiteColor];
     _detailView = [[VenueDetailView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    _detailView.nameLabel.numberOfLines = 2;
-    _detailView.nameLabel.text = [NSString stringWithFormat:@"%@\n %@", self.venue.name, self.venue.address];
+    _detailView.nameLabel.text = self.venue.name;
+    if (self.venue.address) {
+        _detailView.addressLabel.text = self.venue.address;
+    } else {
+        _detailView.addressLabel.text = @"Exact address unavailable.";
+    }
     _detailView.mapView.delegate = self;
-    
+
     if ([self alreadySaved]) {
+        [_detailView.addToListButton setBackgroundImage:[UIImage imageNamed:@"removeFromList"] forState:UIControlStateNormal];
         [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
         [_detailView.addToListButton addTarget:self action:@selector(removeFromList) forControlEvents:UIControlEventTouchUpInside];
     } else {
+        [_detailView.addToListButton setBackgroundImage:[UIImage imageNamed:@"addToList"] forState:UIControlStateNormal];
         [_detailView.addToListButton setTitle:kAddToList forState:UIControlStateNormal];
         [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
     }
-    [_detailView.getDirectionsButton addTarget:self action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
     [self scopeMapToVenue];
     [self.view addSubview:_detailView];
 }
@@ -81,6 +86,7 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     }
     NSMutableSet *venues = [self.currentList mutableSetValueForKey:@"venues"];
     [venues addObject:self.venue];
+    [_detailView.addToListButton setBackgroundImage:[UIImage imageNamed:@"removeFromList"] forState:UIControlStateNormal];
     [_detailView.addToListButton setTitle:kRemoveFromList forState:UIControlStateNormal];
     [_detailView.addToListButton addTarget:self action:@selector(removeFromList) forControlEvents:UIControlEventTouchUpInside];
     [self displayNotificationWithMessage:[NSString stringWithFormat:@"Saved to %@!", self.currentList.name]];
@@ -95,6 +101,7 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 
 - (void)removeFromList {
     [[self.currentList mutableSetValueForKey:@"venues"] removeObject:self.venue];
+    [_detailView.addToListButton setBackgroundImage:[UIImage imageNamed:@"addToList"] forState:UIControlStateNormal];
     [_detailView.addToListButton setTitle:kAddToList forState:UIControlStateNormal];
     [_detailView.addToListButton addTarget:self action:@selector(addToList) forControlEvents:UIControlEventTouchUpInside];
     [self displayNotificationWithMessage:[NSString stringWithFormat:@"Removed from %@", self.currentList.name]];

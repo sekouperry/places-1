@@ -8,33 +8,48 @@ const NSInteger kEdgeInset = 10;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 100)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 180)];
         _imageView.backgroundColor = [UIColor lightGrayColor];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
 
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_imageView.frame) + kEdgeInset, CGRectGetMaxY(_imageView.frame)+ kEdgeInset, CGRectGetWidth(self.frame)- kEdgeInset*2, 40)];
-        _nameLabel.backgroundColor = [UIColor lightGrayColor];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_imageView.frame) + kEdgeInset, CGRectGetMaxY(_imageView.frame)+ kEdgeInset, CGRectGetWidth(self.frame)- kEdgeInset*2, 20)];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:16];
+        _addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_nameLabel.frame), CGRectGetWidth(self.frame)-kEdgeInset*2, 20)];
+        _addressLabel.font = [UIFont boldSystemFontOfSize:14];
+        _addressLabel.textColor = [UIColor lightGrayColor];
 
-        _addToListButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        _addToListButton.frame = CGRectMake(CGRectGetMinX(_nameLabel.frame), CGRectGetMaxY(_nameLabel.frame) + kEdgeInset, 150, 30);
-        [_addToListButton setTitle:@"Add to list." forState:UIControlStateNormal];
 
-        _getDirectionsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        _getDirectionsButton.frame = CGRectMake(CGRectGetMaxX(_addToListButton.frame)+10, CGRectGetMinY(_addToListButton.frame), 140, 30);
-        [_getDirectionsButton setTitle:@"Get Directions" forState:UIControlStateNormal];
+        _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_addressLabel.frame) + kEdgeInset, CGRectGetWidth(self.frame), 100)];
 
-        _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_addToListButton.frame) + kEdgeInset, CGRectGetWidth(_nameLabel.frame), 100)];
 
-        _openingHoursLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(_nameLabel.frame), 80)];
+        _middleSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(self.frame), 105)];
+        _middleSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];
+        _openingHoursLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, kEdgeInset, CGRectGetWidth(_middleSection.frame)-kEdgeInset, 20)];
         _openingHoursLabel.text = @"Opening Hours:";
+        _openingHoursLabel.font = [UIFont boldSystemFontOfSize:16];
+        _openingHoursLabel.textColor = [UIColor darkGrayColor];
+        _openingHoursLabel.backgroundColor = [UIColor clearColor];
+        [_middleSection addSubview:_openingHoursLabel];
 
-        [self addSubview:_openingHoursLabel];
+        _bottomSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_middleSection.frame), CGRectGetWidth(self.frame), 60)];
+        _bottomSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];
+
+        _addToListButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addToListButton setBackgroundImage:[UIImage imageNamed:@"addToList"] forState:UIControlStateNormal];
+        _addToListButton.frame = CGRectMake(kEdgeInset, kEdgeInset, CGRectGetWidth(_bottomSection.frame)-kEdgeInset*2, 42);
+        _addToListButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        _addToListButton.titleLabel.shadowColor = [UIColor darkGrayColor];
+        _addToListButton.titleLabel.shadowOffset = CGSizeMake(-1, 1);
+        [_addToListButton setTitle:@"Add to list." forState:UIControlStateNormal];
+        [_bottomSection addSubview:_addToListButton];
+
+        [self addSubview:_middleSection];
+        [self addSubview:_bottomSection];
         [self addSubview:_mapView];
-        [self addSubview:_addToListButton];
         [self addSubview:_imageView];
         [self addSubview:_nameLabel];
-        [self addSubview:_getDirectionsButton];
+        [self addSubview:_addressLabel];
     }
     return self;
 }
