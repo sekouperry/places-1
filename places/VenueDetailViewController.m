@@ -68,10 +68,11 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 
 - (void)displayHours {
     if (self.venueOpeningHours) {
-        _detailView.openingHoursLabel.text = @"I HAVE OPENING HOURS";
+        _detailView.openingHoursLabel.text = [self.venueOpeningHours objectForKey:@"status"];
     } else {
         _detailView.openingHoursLabel.text = @"Opening hours not available.";
     }
+[_detailView setNeedsDisplay];
 }
 
 - (void)displayImage {
