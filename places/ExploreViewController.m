@@ -58,6 +58,7 @@
     self.tableView.dataSource = self;
 
     self.loadingPlaceholder = [[LoadingPlaceholderView alloc] initWithFrame:self.originalTableRect];
+    [self.loadingPlaceholder.refreshButton addTarget:self action:@selector(requestLocations) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:self.mapViewController.view];
     [self.view addSubview:self.loadingPlaceholder];
@@ -114,13 +115,14 @@
 }
 
 - (void)requestLocations {
+    [self.loadingPlaceholder swingLabel];
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
 
     void (^completionBlock)(NSArray *) = ^(NSArray *array){
         self.places = [array mutableCopy];
         if (!self.places) {
-            self.loadingPlaceholder.messageLabel.text = @"Error loading data";
-            self.loadingPlaceholder.shouldAnimate = NO;
+            self.loadingPlaceholder.messageLabel.text = @"Error finding places.";
+            [self.loadingPlaceholder errorAnimation];
             return;
         }
 
@@ -165,6 +167,7 @@
     VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] initWithVenue:venue];
     detailViewController.currentList = self.currentList;
     detailViewController.title = venue.name;
+
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
