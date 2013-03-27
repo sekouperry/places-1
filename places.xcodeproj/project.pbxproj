@@ -50,6 +50,9 @@
 		668B13F0170375B00003A25F /* placeHolder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 668B13EE170375B00003A25F /* placeHolder@2x.png */; };
 		668B13F6170388000003A25F /* placesIcon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 668B13F5170388000003A25F /* placesIcon57.png */; };
 		668B13F8170388060003A25F /* placesIcon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 668B13F7170388060003A25F /* placesIcon114.png */; };
+		668B13FA17038ACD0003A25F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 668B13F917038ACD0003A25F /* Default.png */; };
+		668B13FC17038AD80003A25F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 668B13FB17038AD80003A25F /* Default@2x.png */; };
+		668B13FE17038AF30003A25F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 668B13FD17038AF30003A25F /* Default-568h@2x.png */; };
 		66E7935616E80512009A9152 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935516E80512009A9152 /* UIKit.framework */; };
 		66E7935816E80512009A9152 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935716E80512009A9152 /* Foundation.framework */; };
 		66E7935A16E80512009A9152 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7935916E80512009A9152 /* CoreGraphics.framework */; };
@@ -139,6 +142,9 @@
 		668B13EE170375B00003A25F /* placeHolder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeHolder@2x.png"; sourceTree = "<group>"; };
 		668B13F5170388000003A25F /* placesIcon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placesIcon57.png; sourceTree = "<group>"; };
 		668B13F7170388060003A25F /* placesIcon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placesIcon114.png; sourceTree = "<group>"; };
+		668B13F917038ACD0003A25F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		668B13FB17038AD80003A25F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		668B13FD17038AF30003A25F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		66E7935216E80512009A9152 /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E7935516E80512009A9152 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		66E7935716E80512009A9152 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -284,6 +290,9 @@
 		66E7934916E80512009A9152 = {
 			isa = PBXGroup;
 			children = (
+				668B13FD17038AF30003A25F /* Default-568h@2x.png */,
+				668B13FB17038AD80003A25F /* Default@2x.png */,
+				668B13F917038ACD0003A25F /* Default.png */,
 				668B13F7170388060003A25F /* placesIcon114.png */,
 				668B13F5170388000003A25F /* placesIcon57.png */,
 				6629765316F0D2FF00B460AC /* CoreData.framework */,
@@ -475,6 +484,9 @@
 				668B13F0170375B00003A25F /* placeHolder@2x.png in Resources */,
 				668B13F6170388000003A25F /* placesIcon57.png in Resources */,
 				668B13F8170388060003A25F /* placesIcon114.png in Resources */,
+				668B13FA17038ACD0003A25F /* Default.png in Resources */,
+				668B13FC17038AD80003A25F /* Default@2x.png in Resources */,
+				668B13FE17038AF30003A25F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
