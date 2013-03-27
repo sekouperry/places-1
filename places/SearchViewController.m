@@ -54,6 +54,26 @@ const NSInteger kSearchBarHeight = 40;
     [self showDetailViewControllerWithVenue:[self.places objectAtIndex:indexPath.row]];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (!self.places) {
+        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((CGRectGetWidth(header.frame)/2)-70, CGRectGetHeight(header.frame)/2, CGRectGetWidth(tableView.frame), 20)];
+        label.text = @"No results found.";
+        label.textColor= [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0  alpha:1.0];
+        label.font = [UIFont boldSystemFontOfSize:16];
+        [header addSubview:label];
+        return header;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (!self.places) {
+        return 20.0;
+    }
+    return 0.0;
+}
+
 - (void)showDetailViewControllerWithVenue:(Venue *)venue {
     VenueDetailViewController *detailViewController = [[VenueDetailViewController alloc] initWithVenue:venue];
     detailViewController.currentList = self.currentList;
