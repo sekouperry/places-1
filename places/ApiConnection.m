@@ -15,14 +15,14 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ll=%@&query=%@%@",kApiUrl, locationParams, cleanQuery, koauth_token]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
+                                                       timeoutInterval:120];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
-            NSLog(@"Error fetching venue location %@", error.userInfo);
             completion(nil);
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             return;
         }
 
@@ -69,7 +69,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 
 + (void)fetchDetailsFromVenue:(NSString *)venueId compeltionHandler:(void (^)())completion {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:120];
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -85,7 +85,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 
 + (void)fetchPhotosFromVenue:(NSString *)venueId completionHandler:(void (^)())completion {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:120];
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {

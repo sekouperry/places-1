@@ -7,7 +7,6 @@
 #import "MapAnnotationView.h"
 #import "VenueDetailViewController.h"
 
-
 @interface ExploreViewController ()
 
 @end
