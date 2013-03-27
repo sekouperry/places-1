@@ -50,6 +50,7 @@ static NSString * const kRemoveFromList = @"Remove from list.";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.detailView.imageView.image = [UIImage imageNamed:@"placeHolder"];
 
     void (^photoCompletionBlock)(NSDictionary *) = ^(NSDictionary *photo){
         self.venuePhotoDetails = photo;
