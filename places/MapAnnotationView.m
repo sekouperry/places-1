@@ -5,7 +5,6 @@
 const NSInteger kFrameSize = 35;
 @implementation MapAnnotationView
 
-
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
 
@@ -42,7 +41,6 @@ const NSInteger kFrameSize = 35;
         CGPathAddLineToPoint(path, NULL, (kFrameSize/2)-(kFrameSize/4) + halfInset, kFrameSize);
         CGPathAddLineToPoint(path, NULL, inset, kFrameSize);
 }
-
 
 - (void)drawRect:(CGRect)rect {
     MapAnnotation *annotation = (MapAnnotation *)self.annotation;

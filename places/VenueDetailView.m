@@ -24,7 +24,6 @@ const NSInteger kEdgeInset = 10;
 
         _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_addressLabel.frame) + kEdgeInset, CGRectGetWidth(self.frame), 100)];
 
-
         _middleSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(self.frame), 105)];
         if ([UIScreen mainScreen].bounds.size.height < 500) {
             _middleSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(self.frame), 95)];

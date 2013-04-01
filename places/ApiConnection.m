@@ -11,14 +11,14 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
 + (void)fetchVenueswithLocation:(CLLocationCoordinate2D)location Query:(NSString *)query andCompletionHandler:(void (^)())completion {
     NSString *locationParams = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
     NSString *cleanQuery = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ll=%@&query=%@%@",kApiUrl, locationParams, cleanQuery, koauth_token]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:120];
-    
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
+
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             completion(nil);

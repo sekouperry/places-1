@@ -15,9 +15,7 @@
     __strong static LocationManager *locationManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-
         locationManager = [[self alloc] init];
-        
     });
     return locationManager;
 }

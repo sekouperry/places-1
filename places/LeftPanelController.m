@@ -8,7 +8,6 @@
 
 @end
 
-
 @implementation LeftPanelController
 @synthesize delegate;
 
