@@ -52,17 +52,15 @@ static NSString * const kRemoveFromList = @"Remove from list.";
     [super viewDidLoad];
     self.detailView.imageView.image = [UIImage imageNamed:@"placeHolder"];
 
-    void (^photoCompletionBlock)(NSDictionary *) = ^(NSDictionary *photo){
+    [ApiConnection fetchPhotosFromVenue:self.venue.foursquareId completionHandler:^(NSDictionary *photo) {
         self.venuePhotoDetails = photo;
         [self displayImage];
-    };
+    }];
 
-    [ApiConnection fetchPhotosFromVenue:self.venue.foursquareId completionHandler:photoCompletionBlock];
-    void (^openingHoursCompletionBlock)(NSDictionary *) = ^(NSDictionary *hours) {
+    [ApiConnection fetchDetailsFromVenue:self.venue.foursquareId compeltionHandler:^(NSDictionary *hours) {
         self.venueOpeningHours = hours;
         [self displayHours];
-    };
-    [ApiConnection fetchDetailsFromVenue:self.venue.foursquareId compeltionHandler:openingHoursCompletionBlock];
+    }];
     [self scopeMapToVenue];
 }
 

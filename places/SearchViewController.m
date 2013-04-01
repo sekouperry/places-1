@@ -90,15 +90,13 @@ const NSInteger kSearchBarHeight = 40;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self hideKeyboard];
 
-   void(^completionBlock)(NSArray *) = ^(NSArray *array){
-       self.places = array;
-       dispatch_async(dispatch_get_main_queue(), ^{
-           [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-       });
-   };
-
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
-    [ApiConnection fetchVenueswithLocation:location Query:searchBar.text andCompletionHandler:completionBlock];
+    [ApiConnection fetchVenueswithLocation:location Query:searchBar.text andCompletionHandler:^(NSArray *array) {
+        self.places = array;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        });
+    }];
 }
 
 - (void)hideKeyboard {

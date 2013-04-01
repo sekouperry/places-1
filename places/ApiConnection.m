@@ -8,7 +8,7 @@ NSString *const kApiUrl = @"https://api.foursquare.com/v2/venues/search?";
 NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQKYOW32WLYTADZCB&v=20130307";
 @implementation ApiConnection
 
-+ (void)fetchVenueswithLocation:(CLLocationCoordinate2D)location Query:(NSString *)query andCompletionHandler:(void (^)())completion {
++ (void)fetchVenueswithLocation:(CLLocationCoordinate2D)location Query:(NSString *)query andCompletionHandler:(void (^)(NSArray *))completion {
     NSString *locationParams = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
     NSString *cleanQuery = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
@@ -63,11 +63,13 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     }];
 }
 
-+ (void)fetchVenuesFromLocation:(CLLocationCoordinate2D)location completionHandler:(void (^)())completion {
-    [self fetchVenueswithLocation:location Query:@"" andCompletionHandler:completion];
++ (void)fetchVenuesFromLocation:(CLLocationCoordinate2D)location completionHandler:(void (^)(NSArray *))completion {
+    [self fetchVenueswithLocation:location Query:@"" andCompletionHandler:^(NSArray *venues) {
+        completion(venues);
+    }];
 }
 
-+ (void)fetchDetailsFromVenue:(NSString *)venueId compeltionHandler:(void (^)())completion {
++ (void)fetchDetailsFromVenue:(NSString *)venueId compeltionHandler:(void (^)(NSDictionary *))completion {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:120];
 
@@ -83,7 +85,7 @@ NSString *const koauth_token = @"&oauth_token=TCHGP2PM3JLY5GVM4IDV3DSEC3TKLEMRQK
     }];
 }
 
-+ (void)fetchPhotosFromVenue:(NSString *)venueId completionHandler:(void (^)())completion {
++ (void)fetchPhotosFromVenue:(NSString *)venueId completionHandler:(void (^)(NSDictionary *))completion {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?%@", kPhotoApiPrefix, venueId, koauth_token]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:120];
 

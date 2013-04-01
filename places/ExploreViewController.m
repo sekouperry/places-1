@@ -85,23 +85,22 @@
     [self.exploreView.loadingPlaceholder swingLabel];
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
 
-    void (^completionBlock)(NSArray *) = ^(NSArray *array){
+    [ApiConnection fetchVenuesFromLocation:location completionHandler:^(NSArray *array) {
         self.places = [array mutableCopy];
         if (!self.places) {
             self.exploreView.loadingPlaceholder.messageLabel.text = @"Error finding places.";
             [self.exploreView.loadingPlaceholder errorAnimation];
             return;
         }
-
+        
         [self plotPlaces];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.exploreView.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
             [self.exploreView.loadingPlaceholder removeFromSuperview];
             [self.view addSubview:self.exploreView.tableView];
         });
-    };
+    }];
 
-    [ApiConnection fetchVenuesFromLocation:location completionHandler:completionBlock];
     [self.exploreView.mapViewController focusCurrentLocationWithDistance:500];
 }
 
