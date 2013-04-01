@@ -9,6 +9,9 @@ const NSInteger kEdgeInset = 10;
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 180)];
+        if ([UIScreen mainScreen].bounds.size.height < 500) {
+            _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 100)];
+        }
         _imageView.backgroundColor = [UIColor lightGrayColor];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
@@ -19,11 +22,13 @@ const NSInteger kEdgeInset = 10;
         _addressLabel.font = [UIFont boldSystemFontOfSize:14];
         _addressLabel.textColor = [UIColor lightGrayColor];
 
-
         _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_addressLabel.frame) + kEdgeInset, CGRectGetWidth(self.frame), 100)];
 
 
         _middleSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(self.frame), 105)];
+        if ([UIScreen mainScreen].bounds.size.height < 500) {
+            _middleSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_mapView.frame), CGRectGetWidth(self.frame), 95)];
+        }
         _middleSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];
         _openingHoursHeader = [[UILabel alloc] initWithFrame:CGRectMake(kEdgeInset, kEdgeInset, CGRectGetWidth(_middleSection.frame)-kEdgeInset, 20)];
         _openingHoursHeader.text = @"Opening Hours:";
@@ -38,7 +43,7 @@ const NSInteger kEdgeInset = 10;
         [_middleSection addSubview:_openingHoursHeader];
 
         _bottomSection = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_middleSection.frame), CGRectGetWidth(self.frame), 60)];
-        _bottomSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];
+            _bottomSection.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0  blue:241/255.0  alpha:1.0];
 
         _addToListButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_addToListButton setBackgroundImage:[UIImage imageNamed:@"addToList"] forState:UIControlStateNormal];
