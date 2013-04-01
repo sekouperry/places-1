@@ -73,6 +73,7 @@
 		66E7939916E8115F009A9152 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7939816E8115E009A9152 /* MapKit.framework */; };
 		66E7939B16E814E4009A9152 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7939A16E814E4009A9152 /* CoreLocation.framework */; };
 		66E7939E16E81927009A9152 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E7939D16E81927009A9152 /* MapViewController.m */; };
+		66F5A24C1709E2D100A5E7DB /* ExploreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F5A24B1709E2D100A5E7DB /* ExploreView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,8 @@
 		66E7939A16E814E4009A9152 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		66E7939C16E81927009A9152 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = ../MapViewController.h; sourceTree = "<group>"; };
 		66E7939D16E81927009A9152 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = ../MapViewController.m; sourceTree = "<group>"; };
+		66F5A24A1709E2D100A5E7DB /* ExploreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreView.h; sourceTree = "<group>"; };
+		66F5A24B1709E2D100A5E7DB /* ExploreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreView.m; sourceTree = "<group>"; };
 		F32D4231F0DD42369DAE14DD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -246,6 +249,8 @@
 				6635BC4716EE45DD007FB4C0 /* MapAnnotationView.m */,
 				6629765F16F0DA7B00B460AC /* VenueDetailView.h */,
 				6629766016F0DA7B00B460AC /* VenueDetailView.m */,
+				66F5A24A1709E2D100A5E7DB /* ExploreView.h */,
+				66F5A24B1709E2D100A5E7DB /* ExploreView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				6629767216F3AFA800B460AC /* List.m in Sources */,
 				6613090B16FA704600CFCD74 /* NotificationViewController.m in Sources */,
 				6601990E1702204B008BDE67 /* LoadingPlaceholderView.m in Sources */,
+				66F5A24C1709E2D100A5E7DB /* ExploreView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

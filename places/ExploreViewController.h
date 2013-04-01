@@ -1,22 +1,13 @@
-#import "MapViewController.h"
-#import "List.h"
-#import "LoadingPlaceholderView.h"
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "MapViewController.h"
+#import "List.h"
+#import "ExploreView.h"
 
 @interface ExploreViewController : UIViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 
-@property (strong, nonatomic) LoadingPlaceholderView *loadingPlaceholder;
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) MapViewController *mapViewController;
 
-@property (strong, nonatomic) UIButton *hideTableButton;
-@property (strong, nonatomic) UIButton *showTableButton;
-@property (strong, nonatomic) UIButton *searchAreaButton;
-
-@property (nonatomic) CGRect originalMapRect;
-@property (nonatomic) CGRect originalTableRect;
-
+@property (strong, nonatomic) ExploreView *exploreView;
 @property (strong, nonatomic) NSMutableArray *places;
 @property (strong, nonatomic) List *currentList;
 

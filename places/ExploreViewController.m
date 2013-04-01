@@ -21,49 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGRect mapRect;
-    CGRect tableRect;
-    CGRectDivide(self.view.bounds, &mapRect, &tableRect, CGRectGetHeight(self.view.bounds)*0.2, CGRectMinYEdge);
-    self.originalMapRect = mapRect;
-    self.originalTableRect = tableRect;
 
-    self.hideTableButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.hideTableButton addTarget:self action:@selector(hideTable) forControlEvents:UIControlEventTouchUpInside];
-    self.hideTableButton.frame = mapRect;
-
-    self.showTableButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.showTableButton.frame = CGRectMake(20, 20, 36, 36);
-    [self.showTableButton setBackgroundImage:[UIImage imageNamed:@"displayTable"] forState:UIControlStateNormal];
-    [self.showTableButton addTarget:self action:@selector(showTable) forControlEvents:UIControlEventTouchUpInside];
-    self.showTableButton.hidden = YES;
-
-    self.searchAreaButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.searchAreaButton setBackgroundImage:[UIImage imageNamed:@"searchArea"] forState:UIControlStateNormal];
-    [self.searchAreaButton addTarget:self action:@selector(searchArea) forControlEvents:UIControlEventTouchUpInside];
-    self.searchAreaButton.frame = CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - 100, CGRectGetHeight(self.view.frame) - 105, 200, 40);
-    [self.searchAreaButton setTitle:@"Search this area" forState:UIControlStateNormal];
-    [self.searchAreaButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [self.searchAreaButton.titleLabel setShadowColor:[UIColor blackColor]];
-    [self.searchAreaButton.titleLabel setShadowOffset:CGSizeMake(-1, 0)];
-    self.searchAreaButton.hidden = YES;
-
-    self.mapViewController = [[MapViewController alloc] init];
-    self.mapViewController.view.frame = mapRect;
-    self.mapViewController.mapView.frame = mapRect;
-    self.mapViewController.mapView.delegate = self;
-
-    self.tableView = [[UITableView alloc] initWithFrame:tableRect];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-
-    self.loadingPlaceholder = [[LoadingPlaceholderView alloc] initWithFrame:self.originalTableRect];
-    [self.loadingPlaceholder.refreshButton addTarget:self action:@selector(requestLocations) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.view addSubview:self.mapViewController.view];
-    [self.view addSubview:self.loadingPlaceholder];
-    [self.view addSubview:self.hideTableButton];
-    [self.mapViewController.view addSubview:self.showTableButton];
-    [self.mapViewController.view addSubview:self.searchAreaButton];
+    _exploreView = [[ExploreView alloc] initWithFrame:self.view.frame];
+    self.view = _exploreView;
 
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchButton setBackgroundImage:[UIImage imageNamed:@"searchButton"] forState:UIControlStateNormal];
@@ -72,33 +32,41 @@
     UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
     self.navigationItem.rightBarButtonItem = searchBarItem;
 
-    [self.mapViewController focusCurrentLocationWithDistance:500];
+    self.exploreView.mapViewController.mapView.delegate = self;
+    [self.exploreView.mapViewController focusCurrentLocationWithDistance:500];
 
+    self.exploreView.tableView.delegate = self;
+    self.exploreView.tableView.dataSource = self;
+
+    [self.exploreView.showTableButton addTarget:self action:@selector(showTable) forControlEvents:UIControlEventTouchUpInside];
+    [self.exploreView.searchAreaButton addTarget:self action:@selector(searchArea) forControlEvents:UIControlEventTouchUpInside];
+    [self.exploreView.hideTableButton addTarget:self action:@selector(hideTable) forControlEvents:UIControlEventTouchUpInside];
+    [self.exploreView.loadingPlaceholder.refreshButton addTarget:self action:@selector(requestLocations) forControlEvents:UIControlEventTouchUpInside];
     [self requestLocations];
 }
 
 - (void)hideTable {
-    self.hideTableButton.hidden = YES;
-    self.searchAreaButton.hidden = NO;
+    self.exploreView.hideTableButton.hidden = YES;
+    self.exploreView.searchAreaButton.hidden = NO;
     [UIView animateWithDuration:0.2 animations:^{
-        self.mapViewController.view.frame = self.view.frame;
-        self.mapViewController.mapView.frame = self.view.frame;
+        self.exploreView.mapViewController.view.frame = self.view.frame;
+        self.exploreView.mapViewController.mapView.frame = self.view.frame;
     }];
     [UIView animateWithDuration:0.3 animations: ^{
-        self.tableView.frame = CGRectOffset(self.tableView.frame, 0, 400);
-        self.showTableButton.hidden = NO;
+        self.exploreView.tableView.frame = CGRectOffset(self.exploreView.tableView.frame, 0, 400);
+        self.exploreView.showTableButton.hidden = NO;
     }];
 }
 
 - (void)showTable {
-    self.hideTableButton.hidden = NO;
-    self.searchAreaButton.hidden = YES;
+    self.exploreView.hideTableButton.hidden = NO;
+    self.exploreView.searchAreaButton.hidden = YES;
     [UIView animateWithDuration:0.2 animations:^{
-        self.tableView.frame = self.originalTableRect;
-        self.showTableButton.hidden = YES;
+        self.exploreView.tableView.frame = self.exploreView.originalTableRect;
+        self.exploreView.showTableButton.hidden = YES;
     }];
     [UIView animateWithDuration:0.3 animations:^{
-        self.mapViewController.mapView.frame = self.originalMapRect;
+        self.exploreView.mapViewController.mapView.frame = self.exploreView.originalMapRect;
     }];
 }
 
@@ -107,38 +75,38 @@
         self.places = [array mutableCopy];
         [self plotPlaces];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            [self.exploreView.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         });
     };
-    [ApiConnection fetchVenuesFromLocation:[self.mapViewController.mapView centerCoordinate] completionHandler:completionBlock];
+    [ApiConnection fetchVenuesFromLocation:[self.exploreView.mapViewController.mapView centerCoordinate] completionHandler:completionBlock];
 }
 
 - (void)requestLocations {
-    [self.loadingPlaceholder swingLabel];
+    [self.exploreView.loadingPlaceholder swingLabel];
     CLLocationCoordinate2D location = [[[LocationManager sharedLocation] location] coordinate];
 
     void (^completionBlock)(NSArray *) = ^(NSArray *array){
         self.places = [array mutableCopy];
         if (!self.places) {
-            self.loadingPlaceholder.messageLabel.text = @"Error finding places.";
-            [self.loadingPlaceholder errorAnimation];
+            self.exploreView.loadingPlaceholder.messageLabel.text = @"Error finding places.";
+            [self.exploreView.loadingPlaceholder errorAnimation];
             return;
         }
 
         [self plotPlaces];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-            [self.loadingPlaceholder removeFromSuperview];
-            [self.view addSubview:self.tableView];
+            [self.exploreView.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            [self.exploreView.loadingPlaceholder removeFromSuperview];
+            [self.view addSubview:self.exploreView.tableView];
         });
     };
 
     [ApiConnection fetchVenuesFromLocation:location completionHandler:completionBlock];
-    [self.mapViewController focusCurrentLocationWithDistance:500];
+    [self.exploreView.mapViewController focusCurrentLocationWithDistance:500];
 }
 
 - (void)plotPlaces {
-    [self.mapViewController.mapView removeAnnotations:self.mapViewController.mapView.annotations];
+    [self.exploreView.mapViewController.mapView removeAnnotations:self.exploreView.mapViewController.mapView.annotations];
     for (Venue *venue in self.places) {
         CLLocationCoordinate2D location;
         location.latitude = [venue.lat floatValue];
@@ -150,7 +118,7 @@
         annotation.venue = venue;
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.mapViewController.mapView addAnnotation:annotation];
+            [self.exploreView.mapViewController.mapView addAnnotation:annotation];
         });
     }
 }
@@ -226,7 +194,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self showDetailViewControllerWithVenue:[self.places objectAtIndex:indexPath.row]];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.exploreView.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
